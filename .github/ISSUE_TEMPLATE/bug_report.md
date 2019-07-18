@@ -2,7 +2,7 @@
 name: Bug report
 about: バグに関するレポート
 title: "[BUG]"
-labels: ''
+labels: bug
 assignees: hagishun, YoshihitoAso
 
 ---
