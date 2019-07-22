@@ -1,1 +1,1 @@
-# ibet-node
+# quorum-node
