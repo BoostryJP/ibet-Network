@@ -1,7 +1,7 @@
 # tmr-quorum
 ---
-##1.事前準備
-###1.1 docker-ceのインストール
+## 1.事前準備
+### 1.1 docker-ceのインストール
 - 下記を参考
 https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository
 
