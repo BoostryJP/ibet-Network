@@ -2,7 +2,7 @@
 
 ## 1. docker-ceのインストール
 - 下記を参考
-https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository
+- https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository
 
 ```
 git clone https://github.com/N-Village/tmr-docker.git
@@ -15,12 +15,14 @@ su - $USER
 
 ## 2. quorumコンテナ作成
 - validatorの場合
+
 ```
 cd quorum-prod
 docker build -t quorum .
 ```
 
 - generalの場合
+
 ```
 cd quorum-prod-general
 docker build -t quorum .
@@ -40,8 +42,8 @@ Ubuntu16.04LTSのapt-getではいるGolangのバージョンのデフォルト�
 $ sudo apt-get install golang-1.9
 ```
 
-この方法で入れると/user/bin/goからのシンボリックが通っていないのでgo versionをしてもエラーとなる  
-明示的にシンボリックリンクを設定すること
+- この方法で入れると/user/bin/goからのシンボリックが通っていないのでgo versionをしてもエラーとなる  
+- 明示的にシンボリックリンクを設定すること
 
 ```
 $ sudo ln -s /usr/lib/go-1.9/bin/go /usr/bin/go
