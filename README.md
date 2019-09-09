@@ -14,8 +14,9 @@ cd tmr-docker
 su - $USER
 ```
 
-## 1.2. quorumコンテナ作成(prod環境向け)
-### 1.2.1. docker image作成
+### 1.2. quorumコンテナ作成(prod環境向け)
+
+#### 1.2.1. docker image作成
 - validatorの場合
 ```
 cd quorum-prod
@@ -28,7 +29,7 @@ cd quorum-prod-general
 docker build -t quorum .
 ```
 
-### 1.2.2. istanbul用ノードの設定
+#### 1.2.2. istanbul用ノードの設定
 - ノード情報を作成するためistanbul-toolsを実行させる。
 - istanbul-toolsをcloneする
 - clone https://github.com/getamis/istanbul-tools
