@@ -13,7 +13,6 @@ geth \
 --port "30303" \
 --rpcapi "db,eth,net,web3,istanbul,personal" \
 --networkid "1500002" \
---nodekeyhex $nodekeyhex \
 --nat "any" \
 --gasprice 0 \
 --verbosity 2 \
