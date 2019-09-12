@@ -1,5 +1,4 @@
 #!/bin/bash
-
 mkdir -p /eth/geth
 
 geth --datadir "/eth" init "/eth/genesis.json"
@@ -19,4 +18,3 @@ geth \
 --syncmode "full" \
 --gasprice 0 \
 --verbosity 2
-
