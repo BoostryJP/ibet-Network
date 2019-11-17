@@ -182,7 +182,7 @@ services:
     image: mongo:latest
     ports:
       - 27017:27017
-    entrypoint: mongod --smallfiles --logpath=/dev/null --bind_ip "0.0.0.0"
+    entrypoint: mongod --logpath=/dev/null --bind_ip "0.0.0.0"
     restart: always
     networks:
       app_net:
