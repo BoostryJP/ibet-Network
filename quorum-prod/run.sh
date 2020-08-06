@@ -1,7 +1,7 @@
 #!/bin/ash
 mkdir -p /eth/geth
 
-geth --datadir "/eth" init "/eth/genesis.json"
+geth --datadir "/eth" --nousb init "/eth/genesis.json"
 
 test ! -z "${rpccorsdomain}" && CORS_OPT="--rpccorsdomain \"${rpccorsdomain}\""
 geth \
