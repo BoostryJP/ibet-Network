@@ -20,5 +20,6 @@ ${CORS_OPT} \
 --miner.gasprice 0 \
 --verbosity 2 \
 --nodiscover \
---allow-insecure-unlock
+--allow-insecure-unlock \
+--nousb
 
