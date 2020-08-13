@@ -11,7 +11,7 @@ geth \
 ${CORS_OPT} \
 --datadir "/eth" \
 --port "30303" \
---rpcapi "db,eth,net,web3,istanbul,personal" \
+--rpcapi "admin,debug,miner,txpool,db,eth,net,web3,istanbul,personal" \
 --networkid "1500002" \
 --nat "any" \
 --miner.gasprice 0 \
