@@ -12,6 +12,7 @@ ${CORS_OPT} \
 --datadir /eth \
 --port 30303 \
 --rpcapi admin,debug,miner,txpool,db,eth,net,web3,istanbul,personal \
+--rpcvhosts * \
 --networkid 1500002 \
 --nat any \
 --miner.gasprice 0 \
@@ -20,4 +21,4 @@ ${CORS_OPT} \
 --allow-insecure-unlock \
 --nousb"
 
-ash -c "${GETH_CMD/\*/\\\*}"
+ash -c "${GETH_CMD//\*/\\\*}"
