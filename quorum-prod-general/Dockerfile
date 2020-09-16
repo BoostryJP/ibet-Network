@@ -11,7 +11,7 @@ RUN apk add --no-cache && \
 
 RUN git clone https://github.com/jpmorganchase/quorum.git && \
     cd quorum/ && \
-    git checkout v2.6.0 && \
+    git checkout v2.7.0 && \
     make geth bootnode && \
     mv build/bin/geth /usr/local/bin && \
     mv build/bin/bootnode /usr/local/bin
