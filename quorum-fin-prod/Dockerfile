@@ -1,0 +1,34 @@
+FROM golang:1.13-alpine as builder
+
+WORKDIR /work
+
+RUN apk add --no-cache && \
+    apk add git \
+            make \
+            gcc \
+            musl-dev \
+            linux-headers
+
+RUN git clone https://github.com/jpmorganchase/quorum.git && \
+    cd quorum/ && \
+    git checkout v2.7.0 && \
+    make geth bootnode && \
+    mv build/bin/geth /usr/local/bin && \
+    mv build/bin/bootnode /usr/local/bin
+
+FROM alpine:3.12.0
+
+RUN apk add --no-cache ca-certificates
+
+COPY --from=builder \
+         /usr/local/bin/geth \
+         /usr/local/bin/bootnode \
+     /usr/local/bin/
+
+COPY run.sh /run.sh
+
+EXPOSE 30303 30303/udp 8545
+
+STOPSIGNAL SIGINT
+CMD ["/run.sh"]
+
