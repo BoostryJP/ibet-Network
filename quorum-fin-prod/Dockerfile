@@ -29,5 +29,6 @@ COPY run.sh /run.sh
 
 EXPOSE 30303 30303/udp 8545
 
-CMD /run.sh
+STOPSIGNAL SIGINT
+CMD ["/run.sh"]
 
