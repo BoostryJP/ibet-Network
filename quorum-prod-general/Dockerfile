@@ -11,7 +11,9 @@ RUN apk add --no-cache && \
 
 RUN git clone https://github.com/jpmorganchase/quorum.git && \
     cd quorum/ && \
-    git checkout v2.7.0 && \
+    git checkout v2.7.0
+COPY freezer.go /work/quorum/core/rawdb/
+RUN cd quorum/ && \
     make geth bootnode && \
     mv build/bin/geth /usr/local/bin && \
     mv build/bin/bootnode /usr/local/bin
@@ -29,5 +31,6 @@ COPY run.sh /run.sh
 
 EXPOSE 30303 30303/udp 8545
 
-CMD /run.sh
+STOPSIGNAL SIGINT
+CMD ["/run.sh"]
 
