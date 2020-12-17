@@ -28,6 +28,15 @@ ${PEERS_OPT} \
 
 ash -c "nohup ${GETH_CMD//\*/\\\*} > /dev/stdout 2>&1 &"
 
+for i in $(seq 1 300); do
+  sleep 1
+  ps -ef | grep -v grep | grep "geth --rpc" > /dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    echo "$0: geth Running."
+    break
+  fi
+done
+
 function trap_sigint() {
   echo "$0: geth Shutdown."
   PID=$(ps -ef | grep "geth --rpc" | grep -v grep | awk '{print $1}')
