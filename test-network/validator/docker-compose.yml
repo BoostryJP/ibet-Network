@@ -1,0 +1,178 @@
+version: '3'
+services:
+  testnet-validator-0:
+    hostname: testnet-validator-0
+    build:
+      context: .
+    ports:
+      - '30303:30303'
+      - '8545:8545'
+    environment:
+      - PRIVATE_CONFIG=ignore
+      - rpccorsdomain=*
+      - rpcvhosts=*
+      - nodekeyhex=28c9146d596f120a0a0ba45f5b983c366e1d8bbb988682b2d4fb2502c8d51a05
+    networks:
+      app_net:
+        ipv4_address: 172.16.239.10
+    restart: always
+    command:
+      - /bin/sh
+      - -c
+      - |
+        mkdir -p /eth/geth
+        echo '{"config":{"chainId":1500002,"homesteadBlock":1,"eip150Block":2,"eip150Hash":"0x0000000000000000000000000000000000000000000000000000000000000000","eip155Block":3,"eip158Block":3,"byzantiumBlock":3,"istanbul":{"epoch":30000,"policy":0},"isQuorum":true},"nonce":"0x0","timestamp":"0x5c59183d","extraData":"0x0000000000000000000000000000000000000000000000000000000000000000f89af85494585805c23915d6feae27fb33c6c120833ff11a7294622a8cde6464cf35de07a12963123224f28e909f9495b36d653a9adb4056e72d2a0c959046907206759467edbafd6b3edd79cac703a383e9de80c2f92d32b8410000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000c0","gasLimit":"0x2faf0800","difficulty":"0x1","mixHash":"0x63746963616c2062797a616e74696e65206661756c7420746f6c6572616e6365","coinbase":"0x0000000000000000000000000000000000000000","constantinopleBlock":0,"petersburgBlock":0,"istanbulBlock":0,"alloc":{"585805c23915d6feae27fb33c6c120833ff11a72":{"balance":"0x446c3b15f9926687d2c40534fdb564000000000000"},"622a8cde6464cf35de07a12963123224f28e909f":{"balance":"0x446c3b15f9926687d2c40534fdb564000000000000"},"67edbafd6b3edd79cac703a383e9de80c2f92d32":{"balance":"0x446c3b15f9926687d2c40534fdb564000000000000"},"95b36d653a9adb4056e72d2a0c95904690720675":{"balance":"0x446c3b15f9926687d2c40534fdb564000000000000"}},"number":"0x0","gasUsed":"0x0","parentHash":"0x0000000000000000000000000000000000000000000000000000000000000000"}' > /eth/genesis.json
+        echo '["enode://70b8b0951234c8d69b416303f8850bb040549b6f07565c27794857798324b5998eae0f037f6b21e49e074f838d751fb5e8471bcf5077e183314f4adbad7952c8@172.16.239.10:30303?discport=0","enode://b48c9d6c0b9b12ceb75fc2e62824c1b00599f0be3abc7afeafa602243aaa8a847703fd580086328bde7b2fbf8082cd16922b6986fa0bfedba5006e852e43d2c7@172.16.239.11:30303?discport=0","enode://257a1ac567e898047098c1c1bca493564a13190718230dcbbab83f9e99328ec634faba31a38e71399a192c4edcbc04bb0b5061be2ebb033c3b81423561edd2e6@172.16.239.12:30303?discport=0","enode://d4adb0ef6a859be9f51a3f401a39dcdcf439c8d109f6ddb05e4bc5c2b50799f36bcfb7770f20804862c47d3d7c50f7b5488d21cb1b69ef92f834756ddbedaa84@172.16.239.13:30303?discport=0"]' > /eth/geth/static-nodes.json
+        /run.sh
+  testnet-validator-1:
+    hostname: testnet-validator-1
+    build:
+      context: .
+    ports:
+      - '30304:30303'
+      - '8546:8545'
+    environment:
+      - PRIVATE_CONFIG=ignore
+      - rpccorsdomain=*
+      - rpcvhosts=*
+      - nodekeyhex=2034e828fcdf7453b6e047ee652973a605d473685ab50c6e2c944dd01af7dc01g
+    networks:
+      app_net:
+        ipv4_address: 172.16.239.11
+    restart: always
+    command:
+      - /bin/sh
+      - -c
+      - |
+        mkdir -p /eth/geth
+        echo '{"config":{"chainId":1500002,"homesteadBlock":1,"eip150Block":2,"eip150Hash":"0x0000000000000000000000000000000000000000000000000000000000000000","eip155Block":3,"eip158Block":3,"byzantiumBlock":3,"istanbul":{"epoch":30000,"policy":0},"isQuorum":true},"nonce":"0x0","timestamp":"0x5c59183d","extraData":"0x0000000000000000000000000000000000000000000000000000000000000000f89af85494585805c23915d6feae27fb33c6c120833ff11a7294622a8cde6464cf35de07a12963123224f28e909f9495b36d653a9adb4056e72d2a0c959046907206759467edbafd6b3edd79cac703a383e9de80c2f92d32b8410000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000c0","gasLimit":"0x2faf0800","difficulty":"0x1","mixHash":"0x63746963616c2062797a616e74696e65206661756c7420746f6c6572616e6365","coinbase":"0x0000000000000000000000000000000000000000","constantinopleBlock":0,"petersburgBlock":0,"istanbulBlock":0,"alloc":{"585805c23915d6feae27fb33c6c120833ff11a72":{"balance":"0x446c3b15f9926687d2c40534fdb564000000000000"},"622a8cde6464cf35de07a12963123224f28e909f":{"balance":"0x446c3b15f9926687d2c40534fdb564000000000000"},"67edbafd6b3edd79cac703a383e9de80c2f92d32":{"balance":"0x446c3b15f9926687d2c40534fdb564000000000000"},"95b36d653a9adb4056e72d2a0c95904690720675":{"balance":"0x446c3b15f9926687d2c40534fdb564000000000000"}},"number":"0x0","gasUsed":"0x0","parentHash":"0x0000000000000000000000000000000000000000000000000000000000000000"}' > /eth/genesis.json
+        echo '["enode://70b8b0951234c8d69b416303f8850bb040549b6f07565c27794857798324b5998eae0f037f6b21e49e074f838d751fb5e8471bcf5077e183314f4adbad7952c8@172.16.239.10:30303?discport=0","enode://b48c9d6c0b9b12ceb75fc2e62824c1b00599f0be3abc7afeafa602243aaa8a847703fd580086328bde7b2fbf8082cd16922b6986fa0bfedba5006e852e43d2c7@172.16.239.11:30303?discport=0","enode://257a1ac567e898047098c1c1bca493564a13190718230dcbbab83f9e99328ec634faba31a38e71399a192c4edcbc04bb0b5061be2ebb033c3b81423561edd2e6@172.16.239.12:30303?discport=0","enode://d4adb0ef6a859be9f51a3f401a39dcdcf439c8d109f6ddb05e4bc5c2b50799f36bcfb7770f20804862c47d3d7c50f7b5488d21cb1b69ef92f834756ddbedaa84@172.16.239.13:30303?discport=0"]' > /eth/geth/static-nodes.json
+        /run.sh
+  testnet-validator-2:
+    hostname: testnet-validator-2
+    build:
+      context: .
+    ports:
+      - '30305:30303'
+      - '8547:8545'
+    environment:
+      - PRIVATE_CONFIG=ignore
+      - rpccorsdomain=*
+      - rpcvhosts=*
+      - nodekeyhex=cde619902685e81ba3483bd2e669b97693982501d0057673545b460e9e356690
+    networks:
+      app_net:
+        ipv4_address: 172.16.239.12
+    restart: always
+    command:
+      - /bin/sh
+      - -c
+      - |
+        mkdir -p /eth/geth
+        echo '{"config":{"chainId":1500002,"homesteadBlock":1,"eip150Block":2,"eip150Hash":"0x0000000000000000000000000000000000000000000000000000000000000000","eip155Block":3,"eip158Block":3,"byzantiumBlock":3,"istanbul":{"epoch":30000,"policy":0},"isQuorum":true},"nonce":"0x0","timestamp":"0x5c59183d","extraData":"0x0000000000000000000000000000000000000000000000000000000000000000f89af85494585805c23915d6feae27fb33c6c120833ff11a7294622a8cde6464cf35de07a12963123224f28e909f9495b36d653a9adb4056e72d2a0c959046907206759467edbafd6b3edd79cac703a383e9de80c2f92d32b8410000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000c0","gasLimit":"0x2faf0800","difficulty":"0x1","mixHash":"0x63746963616c2062797a616e74696e65206661756c7420746f6c6572616e6365","coinbase":"0x0000000000000000000000000000000000000000","constantinopleBlock":0,"petersburgBlock":0,"istanbulBlock":0,"alloc":{"585805c23915d6feae27fb33c6c120833ff11a72":{"balance":"0x446c3b15f9926687d2c40534fdb564000000000000"},"622a8cde6464cf35de07a12963123224f28e909f":{"balance":"0x446c3b15f9926687d2c40534fdb564000000000000"},"67edbafd6b3edd79cac703a383e9de80c2f92d32":{"balance":"0x446c3b15f9926687d2c40534fdb564000000000000"},"95b36d653a9adb4056e72d2a0c95904690720675":{"balance":"0x446c3b15f9926687d2c40534fdb564000000000000"}},"number":"0x0","gasUsed":"0x0","parentHash":"0x0000000000000000000000000000000000000000000000000000000000000000"}' > /eth/genesis.json
+        echo '["enode://70b8b0951234c8d69b416303f8850bb040549b6f07565c27794857798324b5998eae0f037f6b21e49e074f838d751fb5e8471bcf5077e183314f4adbad7952c8@172.16.239.10:30303?discport=0","enode://b48c9d6c0b9b12ceb75fc2e62824c1b00599f0be3abc7afeafa602243aaa8a847703fd580086328bde7b2fbf8082cd16922b6986fa0bfedba5006e852e43d2c7@172.16.239.11:30303?discport=0","enode://257a1ac567e898047098c1c1bca493564a13190718230dcbbab83f9e99328ec634faba31a38e71399a192c4edcbc04bb0b5061be2ebb033c3b81423561edd2e6@172.16.239.12:30303?discport=0","enode://d4adb0ef6a859be9f51a3f401a39dcdcf439c8d109f6ddb05e4bc5c2b50799f36bcfb7770f20804862c47d3d7c50f7b5488d21cb1b69ef92f834756ddbedaa84@172.16.239.13:30303?discport=0"]' > /eth/geth/static-nodes.json
+        /run.sh
+  testnet-validator-3:
+    hostname: testnet-validator-3
+    build:
+      context: .
+    ports:
+      - '30306:30303'
+      - '8548:8545'
+    environment:
+      - PRIVATE_CONFIG=ignore
+      - rpccorsdomain=*
+      - rpcvhosts=*
+      - nodekeyhex=81d7029fdd57bc940744841c29abc2513f122ad2a40c5f727e4e1aa12aa9f3e8
+    networks:
+      app_net:
+        ipv4_address: 172.16.239.13
+    restart: always
+    command:
+      - /bin/sh
+      - -c
+      - |
+        mkdir -p /eth/geth
+        echo '{"config":{"chainId":1500002,"homesteadBlock":1,"eip150Block":2,"eip150Hash":"0x0000000000000000000000000000000000000000000000000000000000000000","eip155Block":3,"eip158Block":3,"byzantiumBlock":3,"istanbul":{"epoch":30000,"policy":0},"isQuorum":true},"nonce":"0x0","timestamp":"0x5c59183d","extraData":"0x0000000000000000000000000000000000000000000000000000000000000000f89af85494585805c23915d6feae27fb33c6c120833ff11a7294622a8cde6464cf35de07a12963123224f28e909f9495b36d653a9adb4056e72d2a0c959046907206759467edbafd6b3edd79cac703a383e9de80c2f92d32b8410000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000c0","gasLimit":"0x2faf0800","difficulty":"0x1","mixHash":"0x63746963616c2062797a616e74696e65206661756c7420746f6c6572616e6365","coinbase":"0x0000000000000000000000000000000000000000","constantinopleBlock":0,"petersburgBlock":0,"istanbulBlock":0,"alloc":{"585805c23915d6feae27fb33c6c120833ff11a72":{"balance":"0x446c3b15f9926687d2c40534fdb564000000000000"},"622a8cde6464cf35de07a12963123224f28e909f":{"balance":"0x446c3b15f9926687d2c40534fdb564000000000000"},"67edbafd6b3edd79cac703a383e9de80c2f92d32":{"balance":"0x446c3b15f9926687d2c40534fdb564000000000000"},"95b36d653a9adb4056e72d2a0c95904690720675":{"balance":"0x446c3b15f9926687d2c40534fdb564000000000000"}},"number":"0x0","gasUsed":"0x0","parentHash":"0x0000000000000000000000000000000000000000000000000000000000000000"}' > /eth/genesis.json
+        echo '["enode://70b8b0951234c8d69b416303f8850bb040549b6f07565c27794857798324b5998eae0f037f6b21e49e074f838d751fb5e8471bcf5077e183314f4adbad7952c8@172.16.239.10:30303?discport=0","enode://b48c9d6c0b9b12ceb75fc2e62824c1b00599f0be3abc7afeafa602243aaa8a847703fd580086328bde7b2fbf8082cd16922b6986fa0bfedba5006e852e43d2c7@172.16.239.11:30303?discport=0","enode://257a1ac567e898047098c1c1bca493564a13190718230dcbbab83f9e99328ec634faba31a38e71399a192c4edcbc04bb0b5061be2ebb033c3b81423561edd2e6@172.16.239.12:30303?discport=0","enode://d4adb0ef6a859be9f51a3f401a39dcdcf439c8d109f6ddb05e4bc5c2b50799f36bcfb7770f20804862c47d3d7c50f7b5488d21cb1b69ef92f834756ddbedaa84@172.16.239.13:30303?discport=0"]' > /eth/geth/static-nodes.json
+        /run.sh
+  epirus-api:
+    image: web3labs/epirus-free-api:latest
+    environment:
+      - NODE_ENDPOINT=http://testnet-validator-0:8545
+      - MONGO_CLIENT_URI=mongodb://epirus-mongodb:27017
+      - REINDEX_ENDPOINT=http://epirus-ingestion/reindex/
+      - MONGO_DB_NAME=epirus
+    depends_on:
+      - epirus-mongodb
+      - testnet-validator-0
+    networks:
+      app_net:
+        ipv4_address: 172.16.239.20
+  epirus-mongodb:
+    image: mongo:latest
+    entrypoint: mongod --logpath=/dev/null --bind_ip "0.0.0.0"
+    networks:
+      app_net:
+        ipv4_address: 172.16.239.21
+  epirus-web:
+    image: web3labs/epirus-free-web:latest
+    ports:
+      - 3000:3000
+    environment:
+      - API_URL=/api
+      - NEW_RELIC_LICENSE_KEY=dummy
+    depends_on:
+      - epirus-api
+    networks:
+      app_net:
+        ipv4_address: 172.16.239.22
+  epirus-ingestion:
+    image: web3labs/epirus-free-ingestion:latest
+    environment:
+      - NODE_ENDPOINT=http://testnet-validator-0:8545
+      - MONGO_CLIENT_URI=mongodb://epirus-mongodb:27017
+      - MONGO_DB_NAME=epirus
+    depends_on:
+      - epirus-mongodb
+      - testnet-validator-0
+    networks:
+      app_net:
+        ipv4_address: 172.16.239.23
+  epirus-nginx:
+    image: nginx:latest
+    ports:
+      - 8080:80
+    depends_on:
+      - epirus-api
+      - epirus-web
+    networks:
+      app_net:
+        ipv4_address: 172.16.239.24
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        cat <<'EOF' > /etc/nginx/nginx.conf
+        events { }
+        http {
+          server {
+            listen 80;
+            charset utf-8;
+            location /api/ {
+              proxy_pass http://epirus-api:8090/;
+            }
+            location / {
+              proxy_pass http://epirus-web:3000/;
+            }
+          }
+        }
+        EOF
+        nginx -g "daemon off;" 
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.239.0/24

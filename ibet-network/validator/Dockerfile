@@ -28,10 +28,11 @@ COPY --from=builder \
      /usr/local/bin/
 
 COPY run.sh /run.sh
+COPY healthcheck.sh /healthcheck.sh
 
 EXPOSE 30303 30303/udp 8545
 
 STOPSIGNAL SIGINT
 CMD ["/run.sh"]
-HEALTHCHECK --interval=30s CMD /app/healthcheck.sh
+HEALTHCHECK --interval=30s CMD /healthcheck.sh
 

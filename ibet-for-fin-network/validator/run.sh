@@ -1,7 +1,6 @@
 #!/bin/ash
 mkdir -p /eth/geth
 
-geth --datadir "/eth" --nousb init "/eth/genesis.json"
 
 test ! -z "${rpccorsdomain}" && CORS_OPT="--rpccorsdomain ${rpccorsdomain}"
 test ! -z "${rpcvhosts}" && VHOST_OPT="--rpcvhosts ${rpcvhosts}"
@@ -16,7 +15,7 @@ ${CORS_OPT} \
 --port 30303 \
 --rpcapi admin,debug,miner,txpool,db,eth,net,web3,istanbul,personal \
 ${VHOST_OPT} \
---networkid 1500002 \
+--networkid 1010032 \
 --nat any \
 --nodekeyhex $nodekeyhex \
 --mine \
@@ -40,7 +39,6 @@ for i in $(seq 1 300); do
   fi
 done
 
-
 function trap_sigint() {
   echo "$0: geth Shutdown."
   PID=$(ps -ef | grep "geth --rpc" | grep -v grep | awk '{print $1}')
@@ -58,10 +56,5 @@ trap trap_sigint INT
 
 while :; do
   sleep 5
-  ps -ef | grep -v grep | grep "geth --rpc" > /dev/null 2>&1
-  if [ $? -ne 0 ]; then
-    echo "$0: geth Not Running." 1>&2
-    exit 1
-  fi
 done
 
