@@ -12,7 +12,7 @@ services:
         ipv4_address: 172.16.239.9
   validator-0:
     hostname: validator-0
-    image: quorum-dev
+    image: 257258793156.dkr.ecr.ap-northeast-1.amazonaws.com/quorum:no_memory_leak
     volumes:
       - /home/ubuntu/quorum_data/v0:/eth
     ports:
@@ -39,7 +39,8 @@ services:
         --nat "any" \
         --nodekeyhex "2ad84f0c2e0b87137bd91a2aee2b28cc0bc7eba38922d752bb080d5b4fa34506" \
         --mine \
-        --verbosity 2 \
+        --debug \
+        --metrics \
         --syncmode "full" \
         --ethstats "validator-0:bb98a0b6442386d0cdf8a31b267892c1@172.16.239.9:3000" \
         --gasprice 0
@@ -49,7 +50,7 @@ services:
     restart: always
   validator-1:
     hostname: validator-1
-    image: quorum-dev
+    image: 257258793156.dkr.ecr.ap-northeast-1.amazonaws.com/quorum:no_memory_leak
     volumes:
       - /home/ubuntu/quorum_data/v1:/eth
     ports:
@@ -76,7 +77,8 @@ services:
         --nat "any" \
         --nodekeyhex "844d84c4af13a753eea5528941d7b17d14796717a7a491830bda49af2662c725" \
         --mine \
-        --verbosity 2 \
+        --debug \
+        --metrics \
         --syncmode "full" \
         --ethstats "validator-1:bb98a0b6442386d0cdf8a31b267892c1@172.16.239.9:3000" \
         --gasprice 0
@@ -86,7 +88,7 @@ services:
     restart: always
   validator-2:
     hostname: validator-2
-    image: quorum-dev
+    image: 257258793156.dkr.ecr.ap-northeast-1.amazonaws.com/quorum:no_memory_leak
     volumes:
       - /home/ubuntu/quorum_data/v2:/eth
     ports:
@@ -113,7 +115,8 @@ services:
         --nat "any" \
         --nodekeyhex "9fa7eb5f2588d4fd510aabfacbf99f2e0a9bca56c75b8ea66c511b7850d5d1be" \
         --mine \
-        --verbosity 2 \
+        --debug \
+        --metrics \
         --syncmode "full" \
         --ethstats "validator-2:bb98a0b6442386d0cdf8a31b267892c1@172.16.239.9:3000" \
         --gasprice 0
@@ -123,7 +126,7 @@ services:
     restart: always
   validator-3:
     hostname: validator-3
-    image: quorum-dev
+    image: 257258793156.dkr.ecr.ap-northeast-1.amazonaws.com/quorum:no_memory_leak
     volumes:
       - /home/ubuntu/quorum_data/v3:/eth
     ports:
@@ -150,7 +153,8 @@ services:
         --nat "any" \
         --nodekeyhex "13fe4f966e610ff5ac67965d02fd63a5883c6932a4faa1d2ca974f9e9595adc4" \
         --mine \
-        --verbosity 2 \
+        --debug \
+        --metrics \
         --syncmode "full" \
         --ethstats "validator-3:bb98a0b6442386d0cdf8a31b267892c1@172.16.239.9:3000" \
         --gasprice 0
