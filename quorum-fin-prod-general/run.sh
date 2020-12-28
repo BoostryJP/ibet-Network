@@ -1,7 +1,6 @@
 #!/bin/ash
 mkdir -p /eth/geth
 
-geth --datadir "/eth" --nousb init "/eth/genesis.json"
 
 test ! -z "${rpccorsdomain}" && CORS_OPT="--rpccorsdomain ${rpccorsdomain}"
 test ! -z "${rpcvhosts}" && VHOST_OPT="--rpcvhosts ${rpcvhosts}"
@@ -16,11 +15,8 @@ ${CORS_OPT} \
 --port 30303 \
 --rpcapi admin,debug,miner,txpool,db,eth,net,web3,istanbul,personal \
 ${VHOST_OPT} \
---networkid 1500002 \
+--networkid 1010032 \
 --nat any \
---nodekeyhex $nodekeyhex \
---mine \
---syncmode full \
 --miner.gasprice 0 \
 --verbosity 2 \
 --nodiscover \
@@ -39,7 +35,6 @@ for i in $(seq 1 300); do
     break
   fi
 done
-
 
 function trap_sigint() {
   echo "$0: geth Shutdown."

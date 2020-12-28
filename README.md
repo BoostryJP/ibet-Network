@@ -1,5 +1,7 @@
 # ibet-Quorum
 
+## Quickstart
+
 ### 1. docker-ceのインストール
 事前に、Docker実行環境を構築する。
 
@@ -44,5 +46,12 @@ cd /home/ubuntu/gowork/src/github.com/getamis/istanbul-tools
 /home/ubuntu/quorum-data/geth/static-nodes.json
 ```
 
-### 4. 動作保証環境
-* コンテナへの割当メモリ：最低1GB以上が必要
+## License
+
+The go-ethereum library is licensed under the
+[GNU Lesser General Public License v3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html), also
+included in our repository in the `COPYING.LESSER` file.
+
+The go-ethereum binaries is licensed under the
+[GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html), also included
+in our repository in the `COPYING` file.
