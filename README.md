@@ -6,7 +6,7 @@
 
 ## About ibet
 
-[ibet](https://ibet.jp/) is a consortium blockchain built and operated mainly by BOOSTRY Co., Ltd. .
+[ibet](https://ibet.jp/) is a consortium blockchain built and operated mainly by [BOOSTRY Co., Ltd.](https://boostry.co.jp/).
 
 ### 1. Consortium blockchain
 
@@ -19,7 +19,7 @@ Each company in the consortium builds its own node (non-Validator node) and conn
 
 ### 2. Two networks
 
-There are two consortium networks, "ibet" and "ibet for Fin", in compliance with Japanese laws and regulations.
+There are two consortium networks, "**ibet**" and "**ibet for Fin**", in compliance with Japanese laws and regulations.
 Each of them constitutes its own blockchain network.
 
 Each consortium has its own independent governance and operates according to its own terms of reference and guidelines.
