@@ -34,6 +34,7 @@ jobs:
       - name: Build and Push (General)
         uses: docker/build-push-action@v2
         with:
+          context: ibet-for-fin-network/general/
           file: ./ibet-for-fin-network/general/Dockerfile
           push: true
           tags: ${{ steps.get_tag_name.outputs.VERSION }}
