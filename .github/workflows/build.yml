@@ -29,7 +29,7 @@ jobs:
       - name: Build and Push (General)
         uses: docker/build-push-action@v2
         with:
-          context: ibet-for-fin-network/general/
+          context: ./ibet-for-fin-network/general
           file: ./ibet-for-fin-network/general/Dockerfile
           push: true
           tags: ghcr.io/boostryjp/ibet-for-fin-network/general:${{ steps.get_tag_name.outputs.VERSION }}
