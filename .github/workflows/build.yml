@@ -34,4 +34,4 @@ jobs:
           context: ibet-for-fin-network/general/
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ steps.get_tag_name.outputs.VERSION }}
+            ghcr.io/${{ lowercase(github.repository_owner) }}/${{ env.IMAGE_NAME }}:${{ steps.get_tag_name.outputs.VERSION }}
