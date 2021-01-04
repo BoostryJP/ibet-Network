@@ -1,4 +1,4 @@
-# ibet-Quorum
+# ibet-network
 
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0-blue.svg?cacheSeconds=2592000" />
@@ -43,7 +43,7 @@ The network and node definitions for each network are stored in each of the foll
 
 ### Version control policy
 
-The repository of ibet-Quorum will be version controlled by the following policy.
+The repository of ibet-network will be version controlled by the following policy.
 
 - Version up of the whole repository is done every 6 months.
 - Version up of the Quorum node will be done every 6 months. The version to be adopted in the next update will be decided by consortium agreement.
