@@ -24,6 +24,9 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
 
+      - name: Read Docker Image Identifiers
+        run: echo ::set-env name=IMAGE_REPOSITORY::$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
+
       - name: Get tag name
         id: get_tag_name
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
@@ -34,4 +37,4 @@ jobs:
           context: ibet-for-fin-network/general/
           push: true
           tags: |
-            ghcr.io/${{ lowercase(github.repository_owner) }}/${{ env.IMAGE_NAME }}:${{ steps.get_tag_name.outputs.VERSION }}
+            ghcr.io/${{ env.IMAGE_REPOSITORY }}/${{ env.IMAGE_NAME }}:${{ steps.get_tag_name.outputs.VERSION }}
