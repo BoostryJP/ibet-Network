@@ -9,7 +9,7 @@ jobs:
   build_and_push:
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: ibet-for-fin-network/general
+      IMAGE_NAME: ibet-for-fin/general
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -34,7 +34,6 @@ jobs:
       - name: Build and Push (General)
         uses: docker/build-push-action@v2
         with:
-          context: ibet-for-fin-network/general/
           file: ./ibet-for-fin-network/general/Dockerfile
           push: true
-          tags: ghcr.io/${{ env.IMAGE_REPOSITORY }}/${{ env.IMAGE_NAME }}:${{ steps.get_tag_name.outputs.VERSION }}
+          tags: ${{ steps.get_tag_name.outputs.VERSION }}
