@@ -34,8 +34,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ../ibet-for-fin-network/general/
-          file: ./Dockerfile
+          context: ibet-for-fin-network/general/
+          file: ./ibet-for-fin-network/general/Dockerfile
           push: true
           tags: |
             ghcr.io/${{ env.IMAGE_REPOSITORY }}/${{ env.IMAGE_NAME }}:${{ steps.get_tag_name.outputs.VERSION }}
