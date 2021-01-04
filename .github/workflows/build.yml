@@ -8,8 +8,6 @@ on:
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
-    env:
-      IMAGE_NAME: ibet-for-fin-network/general
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -24,9 +22,6 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
 
-      - name: Read Docker Image Identifiers
-        run: echo IMAGE_REPOSITORY=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
-
       - name: Get tag name
         id: get_tag_name
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
@@ -37,4 +32,4 @@ jobs:
           context: ibet-for-fin-network/general/
           file: ./ibet-for-fin-network/general/Dockerfile
           push: true
-          tags: ghcr.io/${{ env.IMAGE_REPOSITORY }}/${{ env.IMAGE_NAME }}:${{ steps.get_tag_name.outputs.VERSION }}
+          tags: ghcr.io/boostryjp/ibet-for-fin-network/general:${{ steps.get_tag_name.outputs.VERSION }}
