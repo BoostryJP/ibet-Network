@@ -11,7 +11,7 @@ jobs:
     env:
       IMAGE_NAME: ibet-fin/general
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
 
       - name: Set up Docker Buildx
@@ -21,7 +21,7 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ github.repository_owner }}
+          username: YoshihitoAso
           password: ${{ secrets.CR_PAT }}
 
       - name: Read Docker Image Identifiers
@@ -31,7 +31,7 @@ jobs:
         id: get_tag_name
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
-      - name: Build and push
+      - name: Build and Push (General)
         uses: docker/build-push-action@v2
         with:
           context: ibet-for-fin-network/general/
