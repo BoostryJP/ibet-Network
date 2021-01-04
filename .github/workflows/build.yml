@@ -32,7 +32,7 @@ jobs:
           context: ./ibet-for-fin-network/general
           file: ./ibet-for-fin-network/general/Dockerfile
           push: true
-          tags: ghcr.io/boostryjp/ibet-network/ibet-fin/general:${{ steps.get_tag_name.outputs.VERSION }}
+          tags: ghcr.io/boostryjp/ibet-fin-network/general:${{ steps.get_tag_name.outputs.VERSION }}
 
       - name: Build and Push (ibet for Fin / Validator)
         uses: docker/build-push-action@v2
@@ -40,7 +40,7 @@ jobs:
           context: ./ibet-for-fin-network/validator
           file: ./ibet-for-fin-network/validator/Dockerfile
           push: true
-          tags: ghcr.io/boostryjp/ibet-network/ibet-fin/validator:${{ steps.get_tag_name.outputs.VERSION }}
+          tags: ghcr.io/boostryjp/ibet-fin-network/validator:${{ steps.get_tag_name.outputs.VERSION }}
 
       - name: Build and Push (ibet / General)
         uses: docker/build-push-action@v2
@@ -48,7 +48,7 @@ jobs:
           context: ./ibet-network/general
           file: ./ibet-network/general/Dockerfile
           push: true
-          tags: ghcr.io/boostryjp/ibet-network/ibet/general:${{ steps.get_tag_name.outputs.VERSION }}
+          tags: ghcr.io/boostryjp/ibet-network/general:${{ steps.get_tag_name.outputs.VERSION }}
 
       - name: Build and Push (ibet / Validator)
         uses: docker/build-push-action@v2
@@ -56,4 +56,4 @@ jobs:
           context: ./ibet-network/validator
           file: ./ibet-network/validator/Dockerfile
           push: true
-          tags: ghcr.io/boostryjp/ibet-network/ibet/validator:${{ steps.get_tag_name.outputs.VERSION }}
+          tags: ghcr.io/boostryjp/ibet-network/validator:${{ steps.get_tag_name.outputs.VERSION }}
