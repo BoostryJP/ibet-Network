@@ -27,6 +27,31 @@ Each consortium has its own independent governance and operates according to its
 - **ibet** : A network in which any company can participate. Mainly non-financial rights (utility tokens) are distributed.
 - **ibet for Fin** : A network in which mainly only financial institutions can participate. Products that require the intermediation of licensed financial institutions in the secondary market are distributed.
 
+
+## About this repository
+
+This repository is used to manage the network definition of the ibet network and the Quorum nodes (Validator, General) defined by the ibet consortium.
+
+### Configuration
+
+The network and node definitions for each network are stored in each of the following directories.
+
+- `ibet-network/`: `ibet` production network
+- `ibet-for-fin-network/`: `ibet for Fin` production network
+- `test-network/`: ibet test network
+- `local-network/`: local network
+
+### Version control policy
+
+The repository of ibet-Quorum will be version controlled by the following policy.
+
+- Version up of the whole repository is done every 6 months.
+- Version up of the Quorum node will be done every 6 months. The version to be adopted in the next update will be decided by consortium agreement.
+  - Without a hard fork: Minor version up (e.g. 1.0 -> 1.1)
+  - With a hard fork: Major version up (e.g., 1.0 -> 2.0)
+- For other urgent fixes, a revision upgrade will be released urgently (e.g., 1.1.0 -> 1.1.1).
+
+
 ## License
 
 - The go-ethereum library is licensed under the
