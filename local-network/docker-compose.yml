@@ -1,18 +1,8 @@
 version: '3'
 services:
-  eth-stats:
-    image: quay.io/amis/ethstats:latest
-    ports:
-      - '3000:3000'
-    environment:
-      - WS_SECRET=bb98a0b6442386d0cdf8a31b267892c1
-    restart: always
-    networks:
-      app_net:
-        ipv4_address: 172.16.239.9
   validator-0:
     hostname: validator-0
-    image: 257258793156.dkr.ecr.ap-northeast-1.amazonaws.com/quorum:no_memory_leak
+    image: ghcr.io/boostryjp/ibet-local/quorum:v0.0.1
     volumes:
       - /home/ubuntu/quorum_data/v0:/eth
     ports:
@@ -42,7 +32,6 @@ services:
         --debug \
         --metrics \
         --syncmode "full" \
-        --ethstats "validator-0:bb98a0b6442386d0cdf8a31b267892c1@172.16.239.9:3000" \
         --gasprice 0
     networks:
       app_net:
@@ -50,7 +39,7 @@ services:
     restart: always
   validator-1:
     hostname: validator-1
-    image: 257258793156.dkr.ecr.ap-northeast-1.amazonaws.com/quorum:no_memory_leak
+    image: ghcr.io/boostryjp/ibet-local/quorum:v0.0.1
     volumes:
       - /home/ubuntu/quorum_data/v1:/eth
     ports:
@@ -80,7 +69,6 @@ services:
         --debug \
         --metrics \
         --syncmode "full" \
-        --ethstats "validator-1:bb98a0b6442386d0cdf8a31b267892c1@172.16.239.9:3000" \
         --gasprice 0
     networks:
       app_net:
@@ -88,7 +76,7 @@ services:
     restart: always
   validator-2:
     hostname: validator-2
-    image: 257258793156.dkr.ecr.ap-northeast-1.amazonaws.com/quorum:no_memory_leak
+    image: ghcr.io/boostryjp/ibet-local/quorum:v0.0.1
     volumes:
       - /home/ubuntu/quorum_data/v2:/eth
     ports:
@@ -118,7 +106,6 @@ services:
         --debug \
         --metrics \
         --syncmode "full" \
-        --ethstats "validator-2:bb98a0b6442386d0cdf8a31b267892c1@172.16.239.9:3000" \
         --gasprice 0
     networks:
       app_net:
@@ -126,7 +113,7 @@ services:
     restart: always
   validator-3:
     hostname: validator-3
-    image: 257258793156.dkr.ecr.ap-northeast-1.amazonaws.com/quorum:no_memory_leak
+    image: ghcr.io/boostryjp/ibet-local/quorum:v0.0.1
     volumes:
       - /home/ubuntu/quorum_data/v3:/eth
     ports:
@@ -156,7 +143,6 @@ services:
         --debug \
         --metrics \
         --syncmode "full" \
-        --ethstats "validator-3:bb98a0b6442386d0cdf8a31b267892c1@172.16.239.9:3000" \
         --gasprice 0
     networks:
       app_net:

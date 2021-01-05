@@ -26,6 +26,7 @@ jobs:
         id: get_tag_name
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
+      # ibet for Fin
       - name: Build and Push (ibet for Fin / General)
         uses: docker/build-push-action@v2
         with:
@@ -42,6 +43,7 @@ jobs:
           push: true
           tags: ghcr.io/boostryjp/ibet-fin-network/validator:${{ steps.get_tag_name.outputs.VERSION }}
 
+      # ibet
       - name: Build and Push (ibet / General)
         uses: docker/build-push-action@v2
         with:
@@ -57,3 +59,29 @@ jobs:
           file: ./ibet-network/validator/Dockerfile
           push: true
           tags: ghcr.io/boostryjp/ibet-network/validator:${{ steps.get_tag_name.outputs.VERSION }}
+
+      # ibet (testnet)
+      - name: Build and Push (ibet testnet / General)
+        uses: docker/build-push-action@v2
+        with:
+          context: ./test-network/general
+          file: ./test-network/general/Dockerfile
+          push: true
+          tags: ghcr.io/boostryjp/ibet-testnet/general:${{ steps.get_tag_name.outputs.VERSION }}
+
+      - name: Build and Push (ibet testnet / Validator)
+        uses: docker/build-push-action@v2
+        with:
+          context: ./test-network/validator
+          file: ./test-network/validator/Dockerfile
+          push: true
+          tags: ghcr.io/boostryjp/ibet-testnet/validator:${{ steps.get_tag_name.outputs.VERSION }}
+
+      # local network
+      - name: Build and Push (local network)
+        uses: docker/build-push-action@v2
+        with:
+          context: ./local-network
+          file: ./local-network/Dockerfile
+          push: true
+          tags: ghcr.io/boostryjp/ibet-localnet/quorum:${{ steps.get_tag_name.outputs.VERSION }}
