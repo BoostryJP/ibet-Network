@@ -5,6 +5,11 @@ services:
     image: ghcr.io/boostryjp/ibet-localnet/quorum:v0.0.1
     volumes:
       - /home/ubuntu/quorum_data/v0:/eth
+    environment:
+      - PRIVATE_CONFIG=ignore
+      - rpccorsdomain=*
+      - rpcvhosts=*
+      - maxpeers=*
     ports:
       - '30303:30303'
       - '8545:8545'
@@ -42,6 +47,11 @@ services:
     image: ghcr.io/boostryjp/ibet-localnet/quorum:v0.0.1
     volumes:
       - /home/ubuntu/quorum_data/v1:/eth
+    environment:
+      - PRIVATE_CONFIG=ignore
+      - rpccorsdomain=*
+      - rpcvhosts=*
+      - maxpeers=*
     ports:
       - '30304:30303'
       - '8546:8545'
@@ -79,6 +89,11 @@ services:
     image: ghcr.io/boostryjp/ibet-localnet/quorum:v0.0.1
     volumes:
       - /home/ubuntu/quorum_data/v2:/eth
+    environment:
+      - PRIVATE_CONFIG=ignore
+      - rpccorsdomain=*
+      - rpcvhosts=*
+      - maxpeers=*
     ports:
       - '30305:30303'
       - '8547:8545'
@@ -116,6 +131,11 @@ services:
     image: ghcr.io/boostryjp/ibet-localnet/quorum:v0.0.1
     volumes:
       - /home/ubuntu/quorum_data/v3:/eth
+    environment:
+      - PRIVATE_CONFIG=ignore
+      - rpccorsdomain=*
+      - rpcvhosts=*
+      - maxpeers=*
     ports:
       - '30306:30303'
       - '8548:8545'
