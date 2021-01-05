@@ -36,10 +36,10 @@ This repository is used to manage the network definition of the ibet network and
 
 The network and node definitions for each network are stored in each of the following directories.
 
-- `ibet-network/`: `ibet` production network
-- `ibet-for-fin-network/`: `ibet for Fin` production network
-- `test-network/`: ibet test network
-- `local-network/`: local network
+- `ibet-network/` - `ibet` production network
+- `ibet-for-fin-network/` - `ibet for Fin` production network
+- `test-network/` - ibet test network
+- `local-network/` - local network
 
 ### Version control policy
 
@@ -51,6 +51,14 @@ The repository of ibet-Network will be version controlled by the following polic
   - With a hard fork: Major version up (e.g., 1.0 -> 2.0)
 - For other urgent fixes, a revision upgrade will be released urgently (e.g., 1.1.0 -> 1.1.1).
 
+
+## Quorum Version
+
+Currently, ibet is using [v2.7.0](https://github.com/ConsenSys/quorum/releases/tag/v2.7.0) of Quorum.
+
+## How to Join the ibet Network
+
+For more information on how to join the network, please visit the official [ibet website](https://ibet.jp/).
 
 ## License
 
