@@ -90,7 +90,7 @@ docker build -t quorum .
 * Generalノードの場合
 
 ```bash
-cd quorum-prod-general
+cd quorum-prod-generalForBridge
 docker build -t quorum .
 ```
 

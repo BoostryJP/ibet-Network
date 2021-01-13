@@ -30,10 +30,10 @@ jobs:
       - name: Build and Push (ibet for Fin / General)
         uses: docker/build-push-action@v2
         with:
-          context: ./ibet-for-fin-network/general
-          file: ./ibet-for-fin-network/general/Dockerfile
+          context: ./ibet-for-fin-network/generalForBridge
+          file: ./ibet-for-fin-network/generalForBridge/Dockerfile
           push: true
-          tags: ghcr.io/boostryjp/ibet-fin-network/general:${{ steps.get_tag_name.outputs.VERSION }}
+          tags: ghcr.io/boostryjp/ibet-fin-network/generalForBridge:${{ steps.get_tag_name.outputs.VERSION }}
 
       - name: Build and Push (ibet for Fin / Validator)
         uses: docker/build-push-action@v2
@@ -47,10 +47,10 @@ jobs:
       - name: Build and Push (ibet / General)
         uses: docker/build-push-action@v2
         with:
-          context: ./ibet-network/general
-          file: ./ibet-network/general/Dockerfile
+          context: ./ibet-network/generalForBridge
+          file: ./ibet-network/generalForBridge/Dockerfile
           push: true
-          tags: ghcr.io/boostryjp/ibet-network/general:${{ steps.get_tag_name.outputs.VERSION }}
+          tags: ghcr.io/boostryjp/ibet-network/generalForBridge:${{ steps.get_tag_name.outputs.VERSION }}
 
       - name: Build and Push (ibet / Validator)
         uses: docker/build-push-action@v2
@@ -64,10 +64,10 @@ jobs:
       - name: Build and Push (ibet testnet / General)
         uses: docker/build-push-action@v2
         with:
-          context: ./test-network/general
-          file: ./test-network/general/Dockerfile
+          context: ./test-network/generalForBridge
+          file: ./test-network/generalForBridge/Dockerfile
           push: true
-          tags: ghcr.io/boostryjp/ibet-testnet/general:${{ steps.get_tag_name.outputs.VERSION }}
+          tags: ghcr.io/boostryjp/ibet-testnet/generalForBridge:${{ steps.get_tag_name.outputs.VERSION }}
 
       - name: Build and Push (ibet testnet / Validator)
         uses: docker/build-push-action@v2
