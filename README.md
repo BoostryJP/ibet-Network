@@ -115,6 +115,6 @@ cd /home/ubuntu/gowork/src/github.com/getamis/istanbul-tools
 
 ```
 /home/ubuntu/quorum-data/genesis.json
-/home/ubuntu/quorum-data/geth/static-nodes.json
+/home/ubuntu/quorum-data/geth/static-nodes_general-for-member.json
 ```
 -->
