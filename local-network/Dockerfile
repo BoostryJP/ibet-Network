@@ -12,7 +12,7 @@ RUN apk add --no-cache && \
 RUN git clone https://github.com/jpmorganchase/quorum.git && \
     cd quorum/ && \
     git checkout v2.7.0
-
+COPY freezer.go /work/quorum/core/rawdb/
 RUN cd quorum/ && \
     make geth bootnode && \
     mv build/bin/geth /usr/local/bin && \

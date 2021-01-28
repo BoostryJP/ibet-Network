@@ -27,6 +27,9 @@ services:
         --rpcaddr "0.0.0.0" \
         --rpcport "8545" \
         --rpccorsdomain "*" \
+        --rpcvhosts "*" \
+        --nousb \
+        --allow-insecure-unlock \
         --datadir "/eth" \
         --port "30303" \
         --rpcapi "db,eth,net,web3,istanbul,personal" \
@@ -69,6 +72,9 @@ services:
         --rpcaddr "0.0.0.0" \
         --rpcport "8545" \
         --rpccorsdomain "*" \
+        --rpcvhosts "*" \
+        --nousb \
+        --allow-insecure-unlock \
         --datadir "/eth" \
         --port "30303" \
         --rpcapi "db,eth,net,web3,istanbul,personal" \
@@ -111,6 +117,9 @@ services:
         --rpcaddr "0.0.0.0" \
         --rpcport "8545" \
         --rpccorsdomain "*" \
+        --rpcvhosts "*" \
+        --nousb \
+        --allow-insecure-unlock \
         --datadir "/eth" \
         --port "30303" \
         --rpcapi "db,eth,net,web3,istanbul,personal" \
@@ -153,6 +162,9 @@ services:
         --rpcaddr "0.0.0.0" \
         --rpcport "8545" \
         --rpccorsdomain "*" \
+        --rpcvhosts "*" \
+        --nousb \
+        --allow-insecure-unlock \
         --datadir "/eth" \
         --port "30303" \
         --rpcapi "db,eth,net,web3,istanbul,personal" \
