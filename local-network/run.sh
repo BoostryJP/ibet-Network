@@ -5,24 +5,24 @@ echo '["enode://6204d2b6d844adf9dd23f47027b29b1e39b08c70b8ec05f82a8037f1676c058f
 geth --datadir "/eth" init "/eth/genesis.json"
 
 GETH_CMD="geth \
+--datadir /eth \
 --identity ${identity} \
+--nodekeyhex ${nodekeyhex} \
+--port 30303 \
+--networkid 2017 \
+--nat any \
 --rpc \
 --rpcaddr 0.0.0.0 \
 --rpcport 8545 \
---datadir /eth \
---debug \
---metrics \
---port 30303 \
 --rpcapi db,eth,net,web3,istanbul,personal \
 --rpccorsdomain '*' \
 --rpcvhosts '*' \
---networkid 2017 \
---nat any \
---nodekeyhex ${nodekeyhex} \
+--allow-insecure-unlock \
+--debug \
+--metrics \
 --mine \
 --syncmode full \
 --miner.gasprice 0 \
---allow-insecure-unlock \
 --miner.gastarget 800000000 \
 --nousb"
 ash -c "nohup ${GETH_CMD//\*/\\\*} > /dev/stdout 2>&1 &"
