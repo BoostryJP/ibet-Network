@@ -9,13 +9,12 @@ GETH_CMD="geth \
 --rpc \
 --rpcaddr 0.0.0.0 \
 --rpcport 8545 \
-${CORS_OPT} \
 --datadir /eth \
 --debug \
 --metrics \
 --port 30303 \
 --rpcapi db,eth,net,web3,istanbul,personal \
- --rpccorsdomain '*' \
+--rpccorsdomain '*' \
 --rpcvhosts '*' \
 --networkid 2017 \
 --nat any \
