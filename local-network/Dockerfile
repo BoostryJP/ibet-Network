@@ -27,6 +27,9 @@ COPY --from=builder \
     /usr/local/bin/bootnode \
     /usr/local/bin/
 
-EXPOSE 30303/tcp 30303/udp 30304/udp 8545/tcp 8546/tcp
+COPY run.sh /run.sh
 
-CMD ["/bin/sh"]
+EXPOSE 30303 30303/udp 8545
+
+STOPSIGNAL SIGINT
+CMD ["/run.sh"]
