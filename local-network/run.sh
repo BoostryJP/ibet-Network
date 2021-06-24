@@ -17,7 +17,6 @@ GETH_CMD="geth \
 --rpcapi db,eth,net,web3,istanbul,personal \
 --rpccorsdomain ${rpccorsdomain} \
 --rpcvhosts ${rpcvhosts} \
---allow-insecure-unlock \
 --debug \
 --metrics \
 --mine \
