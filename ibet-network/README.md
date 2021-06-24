@@ -3,15 +3,15 @@
 `ibet` is a network that any company can join. 
 Mainly non-financial rights (utility tokens) are distributed.  
 
-**2 types of nodes**
+**3 types of nodes**
 
-The ibet network consists of 2 types of nodes.
+The ibet network consists of 3 types of nodes.
 
 1. `Validator` - Verify the integrity of transactions
-2. `General` - Member companies use it. It sends transactions and refer the blockchain data.  
+2. `Bridge` - Connect Validator and General nodes.  
+3. `General` - Member companies use it. It sends transactions and refer the blockchain data.  
 
 ## 1. Common settings
-You need to create a VPC on AWS and connect to ibet network's Validator via VPC Peering.  
 
 ### Environment variable
 
@@ -25,14 +25,14 @@ You need to create a VPC on AWS and connect to ibet network's Validator via VPC 
 ### start validator node 
 
 ```bash
-$ docker pull ghcr.io/boostryjp/ibet-network/validator:v1.0.0
+$ docker pull ghcr.io/boostryjp/ibet-network/validator:v1.1.0
 $ git clone https://github.com/BoostryJP/ibet-Network.git
 $ cd ibet-Network/ibet-network/validator
 $ docker run --name validatorInit -e PRIVATE_CONFIG=ignore -v ./:/eth \
-    ghcr.io/boostryjp/ibet-network/validator:v1.0.0 \
+    ghcr.io/boostryjp/ibet-network/validator:v1.1.0 \
     geth --datadir /eth --nousb init /eth/genesis.json_init
 $ docker run -d --name validator -e PRIVATE_CONFIG=ignore -v ./:/eth \
-    ghcr.io/boostryjp/ibet-network/validator:v1.0.0 run.sh 
+    ghcr.io/boostryjp/ibet-network/validator:v1.1.0 run.sh 
 ```
 
 ### stop validator node 
@@ -41,20 +41,42 @@ $ docker run -d --name validator -e PRIVATE_CONFIG=ignore -v ./:/eth \
 $ docker stop validator
 ```
 
-## 3. How to start/stop `General` node  
+## 3. How to start/stop `Bridge` node  
+
+### start bridge node 
+
+```bash
+$ docker pull ghcr.io/boostryjp/ibet-network/general:v1.1.0
+$ git clone https://github.com/BoostryJP/ibet-Network.git
+$ cd ibet-Network/ibet-network/general
+$ cp ./static-nodes-bridge.json ./geth/static-nodes.json
+$ docker run --name bridgeInit -e PRIVATE_CONFIG=ignore -v ./:/eth \
+    ghcr.io/boostryjp/ibet-network/general:v1.1.0 \
+    geth --datadir /eth --nousb init /eth/genesis.json_init
+$ docker run -d --name bridge -e PRIVATE_CONFIG=ignore -v ./:/eth \
+    ghcr.io/boostryjp/ibet-network/general:v1.1.0 run.sh 
+```
+
+### stop bridge node 
+
+```bash
+$ docker stop bridge
+```
+
+## 4. How to start/stop `General` node  
 
 ### start general node
 
 ```bash
-$ docker pull ghcr.io/boostryjp/ibet-network/general:v1.0.0  
+$ docker pull ghcr.io/boostryjp/ibet-network/general:v1.1.0  
 $ git clone https://github.com/BoostryJP/ibet-Network.git
 $ cd ibet-Network/ibet-network/general
 $ cp ./static-nodes-general.json ./geth/static-nodes.json
 $ docker run --name generalInit -e PRIVATE_CONFIG=ignore -v ./:/eth \
-    ghcr.io/boostryjp/ibet-network/general:v1.0.0 \
+    ghcr.io/boostryjp/ibet-network/general:v1.1.0 \
     geth --datadir /eth --nousb init /eth/genesis.json_init
 $ docker run -d --name general -e PRIVATE_CONFIG=ignore -v ./:/eth \
-    ghcr.io/boostryjp/ibet-network/general:v1.0.0 run.sh 
+    ghcr.io/boostryjp/ibet-network/general:v1.1.0 run.sh 
 ```
 
 ### stop general node 

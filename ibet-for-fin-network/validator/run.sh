@@ -23,7 +23,6 @@ ${VHOST_OPT} \
 --miner.gasprice 0 \
 --verbosity 2 \
 --nodiscover \
---allow-insecure-unlock \
 --miner.gastarget 800000000 \
 ${PEERS_OPT} \
 --nousb"
