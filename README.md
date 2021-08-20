@@ -4,7 +4,9 @@
   <img alt="Version" src="https://img.shields.io/badge/version-1.1-blue.svg?cacheSeconds=2592000" />
 </p>
 
-## About ibet
+<img width="33%" align="right" src="https://user-images.githubusercontent.com/963333/130191619-f1f0c342-ab8f-499d-b8f8-52309c13d2cb.png"/>
+
+## Features
 
 [ibet](https://ibet.jp/) is a consortium blockchain built and operated mainly by [BOOSTRY Co., Ltd.](https://boostry.co.jp/).
 
@@ -30,11 +32,11 @@ Each consortium has its own independent governance and operates according to its
 
 ## About this repository
 
-This repository is used to manage the network definition of the ibet network and the Quorum nodes (Validator, General) defined by the ibet consortium.
+This repository manages the network definitions and Quorum node containers (Validator, General) defined by the ibet consortium.
 
-### Configuration
+### Repository structure
 
-The network and node definitions for each network are stored in each of the following directories.
+The network definitions and node definitions for each network are stored in each of the following directories.
 
 - `ibet-network/` - `ibet` production network
 - `ibet-for-fin-network/` - `ibet for Fin` production network
@@ -56,9 +58,11 @@ The repository of ibet-Network will be version controlled by the following polic
 
 Currently, ibet is using [v21.1.0](https://github.com/ConsenSys/quorum/releases/tag/v21.1.0) of Quorum.
 
+
 ## How to Join the ibet Network
 
 For more information on how to join the network, please visit the official [ibet website](https://ibet.jp/).
+
 
 ## License
 
