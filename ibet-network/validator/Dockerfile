@@ -5,7 +5,7 @@ WORKDIR /work
 
 RUN apk add --no-cache make gcc musl-dev linux-headers git
 
-RUN git clone https://github.com/jpmorganchase/quorum.git && \
+RUN git clone https://github.com/ConsenSys/quorum.git && \
     cd quorum/ && \
     git checkout v21.7.1
 RUN cd quorum/ && \
