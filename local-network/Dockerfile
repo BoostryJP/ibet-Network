@@ -1,13 +1,13 @@
+# Build Geth in a stock Go builder container
 FROM golang:1.15.5-alpine as builder
 
 WORKDIR /work
 
 RUN apk add --no-cache make gcc musl-dev linux-headers git
 
-RUN git clone https://github.com/jpmorganchase/quorum.git && \
+RUN git clone https://github.com/ConsenSys/quorum.git && \
     cd quorum/ && \
-    git checkout v21.1.0
-COPY freezer.go /work/quorum/core/rawdb/
+    git checkout v21.7.1
 RUN cd quorum/ && \
     make geth bootnode && \
     mv build/bin/geth /usr/local/bin && \
