@@ -1,0 +1,4 @@
+eth-keyfile==0.5.1
+eth-utils==1.10.0
+py-solc-x==1.1.1
+web3==5.15.0
