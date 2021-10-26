@@ -450,5 +450,3 @@ class TestE2E:
 
         # Assertion
         assert txn_receipt["status"] == 0
-
-
