@@ -25,10 +25,9 @@ CONTRACT_NAME = "E2ETest"
 ACCOUNT_NAME = "test_user"
 ACCOUNT_PASSWORD = "password"
 
-# Refer environment variables
+# Environment variables
 SOLC_VERSION_PRAGMA = os.environ.get('SOLC_VERSION_PRAGMA') or "^0.8.0"
 WEB3_HTTP_PROVIDER = os.environ.get("WEB3_HTTP_PROVIDER") or "http://localhost:8545"
 CHAIN_ID = int(os.environ.get("CHAIN_ID")) if os.environ.get("CHAIN_ID") else 2017
 TX_GAS_LIMIT = int(os.environ.get("TX_GAS_LIMIT")) if os.environ.get("TX_GAS_LIMIT") else 6000000
 DEPLOYED_CONTRACT_ADDRESS = os.environ.get("DEPLOYED_CONTRACT_ADDRESS") or ZERO_ADDRESS
-ETH_ACCOUNT_PASSWORD = os.environ.get("ETH_ACCOUNT_PASSWORD")

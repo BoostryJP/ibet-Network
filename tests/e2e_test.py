@@ -288,12 +288,24 @@ class TestE2E:
     # - eth_sendTransaction
     # - eth_getTransactionReceipt
     def test_normal_7(self, contract):
-        if ETH_ACCOUNT_PASSWORD is None:
-            return
+        # Import raw key
+        try:
+            web3.geth.personal.import_raw_key(
+                TestAccount.private_key,
+                TestAccount.password
+            )
+        except ValueError:
+            pass
 
+        # Unlock account
         eth_account = web3.geth.personal.list_accounts()[0]
-        web3.geth.personal.unlock_account(eth_account, ETH_ACCOUNT_PASSWORD, 10)
+        web3.geth.personal.unlock_account(
+            eth_account,
+            TestAccount.password,
+            10
+        )
 
+        # Send transaction
         args = [
             False,
             "0x0123456789ABCDeF0123456789aBcdEF01234568",
