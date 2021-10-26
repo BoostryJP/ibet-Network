@@ -25,8 +25,7 @@ from tests.config import (
     WEB3_HTTP_PROVIDER,
     CHAIN_ID,
     TX_GAS_LIMIT,
-    DEPLOYED_CONTRACT_ADDRESS,
-    ETH_ACCOUNT_PASSWORD
+    DEPLOYED_CONTRACT_ADDRESS
 )
 from tests.util import (
     TestAccount,
@@ -48,7 +47,6 @@ web3.middleware_onion.inject(geth_poa_middleware, layer=0)
 # - eth_sendRawTransaction
 # - eth_syncing
 # - txpool_inspect(Geth API)
-# When set ETH_ACCOUNT_PASSWORD, called JSON-RPC list.
 # - personal_listAccounts(Geth API)
 # - personal_unlockAccounts(Geth API)
 # - eth_sendTransaction
