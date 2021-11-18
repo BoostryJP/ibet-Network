@@ -14,7 +14,7 @@ GETH_CMD="geth \
 --rpc \
 --rpcaddr 0.0.0.0 \
 --rpcport 8545 \
---rpcapi db,eth,net,web3,istanbul,personal,txpool \
+--rpcapi eth,net,web3,istanbul,personal,txpool \
 --rpccorsdomain ${rpccorsdomain} \
 --rpcvhosts ${rpcvhosts} \
 --allow-insecure-unlock \
