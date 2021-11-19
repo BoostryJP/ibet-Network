@@ -20,6 +20,7 @@ ${VHOST_OPT} \
 --verbosity 5 \
 --nodiscover \
 --allow-insecure-unlock \
+--debug \
 --miner.gastarget 800000000 \
 ${PEERS_OPT} \
 --nousb"
