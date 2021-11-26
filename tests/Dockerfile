@@ -29,6 +29,7 @@ RUN apt-get update -q \
  language-pack-ja-base \
  language-pack-ja \
  git \
+ curl \
  libyaml-cpp-dev
 
 # remove unnessesory package files
