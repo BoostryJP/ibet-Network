@@ -1,4 +1,4 @@
-name: Build and Push
+name: Build (ibet Validator)
 
 on:
   push:
@@ -32,5 +32,6 @@ jobs:
         with:
           context: ./ibet-network/validator
           file: ./ibet-network/validator/Dockerfile
+          no-cache: true
           push: true
           tags: ghcr.io/boostryjp/ibet-network/validator:${{ steps.get_tag_name.outputs.VERSION }}
