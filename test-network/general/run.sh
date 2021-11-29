@@ -17,10 +17,9 @@ ${VHOST_OPT} \
 --networkid 1500002 \
 --nat any \
 --miner.gasprice 0 \
---verbosity 5 \
+--verbosity 2 \
 --nodiscover \
 --allow-insecure-unlock \
---debug \
 --miner.gastarget 800000000 \
 ${PEERS_OPT} \
 --nousb"
