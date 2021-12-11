@@ -12,7 +12,7 @@ GETH_CMD="geth \
 ${CORS_OPT} \
 --datadir /eth \
 --port 30303 \
---rpcapi admin,debug,miner,txpool,eth,net,web3,istanbul,personal \
+--rpcapi admin,debug,miner,txpool,db,eth,net,web3,istanbul,personal \
 ${VHOST_OPT} \
 --networkid 1010032 \
 --nat any \
