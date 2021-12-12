@@ -56,6 +56,14 @@ The repository of ibet-Network will be version controlled by the following polic
 
 Currently, ibet is using [v21.1.0](https://github.com/ConsenSys/quorum/releases/tag/v21.1.0) of Quorum.
 
+## Consensus Protocol
+
+In our ibet network we use [IBFT](https://docs.goquorum.consensys.net/en/stable/HowTo/Configure/Consensus-Protocols/IBFT/) as a consensus protocol.
+
+## EVM Version
+
+Our ibet network EVM version is byzantium. Therefore, smart contracts need to be compiled for this EVM version.
+
 ## How to Join the ibet Network
 
 For more information on how to join the network, please visit the official [ibet website](https://ibet.jp/).
