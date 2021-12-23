@@ -1,2 +1,5 @@
 .idea/
 docker-compose-*.yml
+.python-version
+tests/contracts/*.json
+tests/__pycache__/

@@ -1,7 +1,6 @@
 #!/bin/ash
 mkdir -p /eth/geth
 
-
 test ! -z "${rpccorsdomain}" && CORS_OPT="--rpccorsdomain ${rpccorsdomain}"
 test ! -z "${rpcvhosts}" && VHOST_OPT="--rpcvhosts ${rpcvhosts}"
 test ! -z "${maxpeers}" && PEERS_OPT="--maxpeers ${maxpeers}"
@@ -54,4 +53,3 @@ trap trap_sigint INT
 while :; do
   sleep 5
 done
-
