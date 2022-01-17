@@ -104,6 +104,12 @@ class ContractUtils:
         return contract
 
     @staticmethod
+    def get_contract_json():
+        """Get contract json"""
+        contract_json = json.load(open(f"{CONTRACT_PATH}/{CONTRACT_NAME}.json", "r"))
+        return contract_json
+
+    @staticmethod
     def send_transaction(transaction: dict, private_key: bytes):
         """Send transaction"""
         _tx_from = transaction["from"]
