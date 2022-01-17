@@ -64,7 +64,7 @@ class ContractUtils:
     @staticmethod
     def deploy_contract(_args: list) -> Tuple[str, dict, str]:
         """Deploy contract"""
-        contract_json = json.load(open(f"{CONTRACT_PATH}/{CONTRACT_NAME}.json", "r"))
+        contract_json = ContractUtils.get_contract_json()
         contract = web3.eth.contract(
             abi=contract_json["abi"],
             bytecode=contract_json["bytecode"],
@@ -96,7 +96,7 @@ class ContractUtils:
     @staticmethod
     def get_contract(contract_address: str):
         """Get contract"""
-        contract_json = json.load(open(f"{CONTRACT_PATH}/{CONTRACT_NAME}.json", "r"))
+        contract_json = ContractUtils.get_contract_json()
         contract = web3.eth.contract(
             address=to_checksum_address(contract_address),
             abi=contract_json['abi'],
