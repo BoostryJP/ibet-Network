@@ -50,6 +50,7 @@ web3.middleware_onion.inject(geth_poa_middleware, layer=0)
 # - personal_listAccounts(Geth API)
 # - personal_unlockAccounts(Geth API)
 # - eth_sendTransaction
+# - eth_getCode
 class TestE2E:
 
     ###########################################################################
@@ -335,6 +336,29 @@ class TestE2E:
         assert contract.functions.item2_int().call() == 8
         assert contract.functions.item2_bytes().call() == b'456789abcdefghijklmnopqrstuvwxyz'
         assert contract.functions.getItemsValueSame().call() == 5
+
+    # <Normal_8_1>
+    # Get bytecode(contract address)
+    # - eth_getCode
+    def test_normal_8_1(self, contract):
+
+        # Get bytecode
+        bytecode = web3.eth.getCode(contract.address)
+
+        # Assertion
+        contract_json = ContractUtils.get_contract_json()
+        assert bytecode.hex() == f'0x{contract_json["deployedBytecode"]}'
+
+    # <Normal_8_2>
+    # Get bytecode(EOA address)
+    # - eth_getCode
+    def test_normal_8_2(self, contract):
+
+        # Get bytecode
+        bytecode = web3.eth.getCode(TestAccount.address)
+
+        # Assertion
+        assert bytecode.hex() == "0x"
 
     ###########################################################################
     # Error Case
