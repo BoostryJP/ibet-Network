@@ -1,7 +1,7 @@
 # ibet-Network
 
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.2-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.3-blue.svg?cacheSeconds=2592000" />
 </p>
 
 <img width="33%" align="right" src="https://user-images.githubusercontent.com/963333/130191619-f1f0c342-ab8f-499d-b8f8-52309c13d2cb.png"/>
