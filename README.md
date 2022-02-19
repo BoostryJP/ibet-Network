@@ -38,8 +38,8 @@ This repository manages the network definitions and Quorum node containers (Vali
 
 The network definitions and node definitions for each network are stored in each of the following directories.
 
-- `ibet-network` : ibet production network
-- `ibet-for-fin-network` : ibet for Fin production network
+- `ibet-network` : ibet main network
+- `ibet-for-fin-network` : ibet for Fin main network
 - `test-network` : ibet test network
 - `local-network` : local network
 
