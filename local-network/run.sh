@@ -25,6 +25,8 @@ GETH_CMD="geth \
 --miner.gasprice 0 \
 --miner.gastarget 800000000 \
 --nousb"
+
+python monitoring/monitor_block_sync.py &
 ash -c "nohup ${GETH_CMD//\*/\\\*} > /dev/stdout 2>&1 &"
 
 for i in $(seq 1 300); do
