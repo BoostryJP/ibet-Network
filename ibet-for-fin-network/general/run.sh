@@ -24,7 +24,7 @@ ${VHOST_OPT} \
 ${PEERS_OPT} \
 --nousb"
 
-python monitoring/monitor_block_sync.py &
+ash -c "nohup python monitoring/monitor_block_sync.py > /dev/stdout 2>&1 &"
 ash -c "nohup ${GETH_CMD//\*/\\\*} > /dev/stdout 2>&1 &"
 
 for i in $(seq 1 300); do
