@@ -32,8 +32,10 @@ RUN apk del .build-deps
 # Deploy scripts
 COPY ./monitoring/monitor_block_sync.py /monitoring/monitor_block_sync.py
 COPY run.sh /run.sh
+COPY healthcheck.sh /healthcheck.sh
 
 EXPOSE 30303 30303/udp 8545
 
 STOPSIGNAL SIGINT
 CMD ["/run.sh"]
+HEALTHCHECK --interval=30s CMD /healthcheck.sh
