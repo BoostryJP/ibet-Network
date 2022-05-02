@@ -12,6 +12,7 @@ services:
       - maxpeers=*
       - nodekeyhex='2ad84f0c2e0b87137bd91a2aee2b28cc0bc7eba38922d752bb080d5b4fa34506'
       - identity='validator-0'
+      - testQBFTBlock=0
     ports:
       - '30303:30303'
       - '8545:8545'
@@ -31,6 +32,7 @@ services:
       - maxpeers=*
       - nodekeyhex='844d84c4af13a753eea5528941d7b17d14796717a7a491830bda49af2662c725'
       - identity='validator-1'
+      - testQBFTBlock=0
     ports:
       - '30304:30303'
       - '8546:8545'
@@ -50,6 +52,7 @@ services:
       - maxpeers=*
       - nodekeyhex='9fa7eb5f2588d4fd510aabfacbf99f2e0a9bca56c75b8ea66c511b7850d5d1be'
       - identity='validator-2'
+      - testQBFTBlock=0
     ports:
       - '30305:30303'
       - '8547:8545'
@@ -69,6 +72,7 @@ services:
       - maxpeers=*
       - nodekeyhex='13fe4f966e610ff5ac67965d02fd63a5883c6932a4faa1d2ca974f9e9595adc4'
       - identity='validator-3'
+      - testQBFTBlock=0
     ports:
       - '30306:30303'
       - '8548:8545'
