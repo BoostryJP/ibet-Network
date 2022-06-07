@@ -9,8 +9,7 @@
         "byzantiumBlock": 3,
         "istanbul": {
             "epoch": 30000,
-            "policy": 0,
-            "testQBFTBlock": 100000000
+            "policy": 0
         },
         "isQuorum": true
     },
