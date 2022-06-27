@@ -18,8 +18,8 @@ GETH_CMD="geth \
 --http.api admin,eth,net,web3,istanbul,personal,txpool,debug \
 --http.corsdomain ${rpccorsdomain} \
 --http.vhosts ${rpcvhosts} \
+--nodiscover \
 --allow-insecure-unlock \
---debug \
 --metrics \
 --mine \
 --syncmode full \

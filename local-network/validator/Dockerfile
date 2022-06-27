@@ -7,7 +7,7 @@ RUN apk add --no-cache make gcc musl-dev linux-headers git
 
 RUN git clone https://github.com/ConsenSys/quorum.git && \
     cd quorum/ && \
-    git checkout v22.1.1
+    git checkout v22.4.4
 RUN cd quorum/ && \
     make geth bootnode && \
     mv build/bin/geth /usr/local/bin && \
