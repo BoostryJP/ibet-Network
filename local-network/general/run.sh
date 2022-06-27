@@ -21,6 +21,7 @@ GETH_CMD="geth \
 --verbosity 2 \
 --miner.gasprice 0 \
 --miner.gastarget 800000000 \
+--cache ${cache} \
 --nousb"
 
 ash -c "nohup python monitoring/monitor_block_sync.py > /dev/stdout 2>&1 &"

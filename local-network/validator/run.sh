@@ -25,6 +25,7 @@ GETH_CMD="geth \
 --syncmode full \
 --miner.gasprice 0 \
 --miner.gastarget 800000000 \
+--cache ${cache} \
 --nousb"
 
 ash -c "nohup ${GETH_CMD//\*/\\\*} > /dev/stdout 2>&1 &"
