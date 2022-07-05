@@ -19,6 +19,7 @@ GETH_CMD="geth \
 --http.vhosts ${rpcvhosts} \
 --allow-insecure-unlock \
 --verbosity 2 \
+--nodiscover \
 --miner.gasprice 0 \
 --miner.gastarget 800000000 \
 --cache ${cache} \

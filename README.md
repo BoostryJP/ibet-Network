@@ -56,7 +56,7 @@ The repository of ibet-Network will be version controlled by the following polic
 
 ## Quorum Version
 
-Currently, ibet is using [v22.1.1](https://github.com/ConsenSys/quorum/releases/tag/v22.1.1) of Quorum.
+Currently, ibet is using [v22.4.4](https://github.com/ConsenSys/quorum/releases/tag/v22.4.4) of Quorum.
 
 ## Consensus Protocol
 
