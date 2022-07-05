@@ -7,8 +7,8 @@ assignees: YoshihitoAso
 
 ---
 
-**Describe the bug**
+## Describe the bug
 A clear and concise description of what the bug is.
 
-**Additional context**
+## Additional context
 Add any other context about the problem here.

@@ -1,4 +1,4 @@
-name: Build (loclanet)
+name: Build (localnet General)
 
 on:
   push:
@@ -26,12 +26,12 @@ jobs:
         id: get_tag_name
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
-      # local network
-      - name: Build and Push (local network)
+      # local network (General)
+      - name: Build and Push (local network / General)
         uses: docker/build-push-action@v2
         with:
-          context: ./local-network
-          file: ./local-network/Dockerfile
+          context: ./local-network/general
+          file: ./local-network/general/Dockerfile
           no-cache: true
           push: true
-          tags: ghcr.io/boostryjp/ibet-localnet/quorum:${{ steps.get_tag_name.outputs.VERSION }}
+          tags: ghcr.io/boostryjp/ibet-localnet/general:${{ steps.get_tag_name.outputs.VERSION }}

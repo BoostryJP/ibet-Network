@@ -1,7 +1,7 @@
 # ibet-Network
 
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.2-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.3-blue.svg?cacheSeconds=2592000" />
 </p>
 
 <img width="33%" align="right" src="https://user-images.githubusercontent.com/963333/130191619-f1f0c342-ab8f-499d-b8f8-52309c13d2cb.png"/>
@@ -38,8 +38,8 @@ This repository manages the network definitions and Quorum node containers (Vali
 
 The network definitions and node definitions for each network are stored in each of the following directories.
 
-- `ibet-network` : ibet production network
-- `ibet-for-fin-network` : ibet for Fin production network
+- `ibet-network` : ibet main network
+- `ibet-for-fin-network` : ibet for Fin main network
 - `test-network` : ibet test network
 - `local-network` : local network
 
@@ -60,7 +60,7 @@ Currently, ibet is using [v21.1.0](https://github.com/ConsenSys/quorum/releases/
 
 ## Consensus Protocol
 
-In our ibet network we use [IBFT](https://docs.goquorum.consensys.net/en/stable/HowTo/Configure/Consensus-Protocols/IBFT/) as a consensus protocol.
+In our ibet network we use [IBFT](https://github.com/ethereum/EIPs/issues/650) as a consensus protocol.
 
 ## EVM Version
 
