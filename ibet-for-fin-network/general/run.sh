@@ -4,6 +4,7 @@ mkdir -p /eth/geth
 test ! -z "${rpccorsdomain}" && CORS_OPT="--http.corsdomain ${rpccorsdomain}"
 test ! -z "${rpcvhosts}" && VHOST_OPT="--http.vhosts ${rpcvhosts}"
 test ! -z "${maxpeers}" && PEERS_OPT="--maxpeers ${maxpeers}"
+test ! -z "${syncmode}" && SYNCMODE_OPT="--syncmode ${syncmode}"
 
 GETH_CMD="geth \
 --http \
@@ -22,6 +23,7 @@ ${VHOST_OPT} \
 --allow-insecure-unlock \
 --miner.gastarget 800000000 \
 ${PEERS_OPT} \
+${SYNCMODE_OPT} \
 --nousb"
 
 ash -c "nohup python monitoring/monitor_block_sync.py > /dev/stdout 2>&1 &"
