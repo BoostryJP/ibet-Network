@@ -1,7 +1,7 @@
 # ibet-Network
 
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.3-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.0-blue.svg?cacheSeconds=2592000" />
 </p>
 
 <img width="33%" align="right" src="https://user-images.githubusercontent.com/963333/130191619-f1f0c342-ab8f-499d-b8f8-52309c13d2cb.png"/>
@@ -56,11 +56,11 @@ The repository of ibet-Network will be version controlled by the following polic
 
 ## Quorum Version
 
-Currently, ibet is using [v21.1.0](https://github.com/ConsenSys/quorum/releases/tag/v21.1.0) of Quorum.
+Currently, ibet is using [v22.4.4](https://github.com/ConsenSys/quorum/releases/tag/v22.4.4) of Quorum.
 
 ## Consensus Protocol
 
-In our ibet network we use [IBFT](https://github.com/ethereum/EIPs/issues/650) as a consensus protocol.
+In our ibet network we use [QBFT](https://arxiv.org/abs/2002.03613) as a consensus protocol.
 
 ## EVM Version
 
