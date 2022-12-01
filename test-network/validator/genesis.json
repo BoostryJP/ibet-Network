@@ -10,7 +10,7 @@
         "istanbul": {
             "epoch": 30000,
             "policy": 0,
-            "testQBFTBlock": 113947365
+            "testQBFTBlock": 115848165
         },
         "isQuorum": true
     },
