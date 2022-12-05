@@ -28,7 +28,9 @@ ${SYNCMODE_OPT} \
 --cache ${cache} \
 --nousb"
 
-ash -c "nohup python monitoring/monitor_block_sync.py > /dev/stdout 2>&1 &"
+if [ -z "${BLOCK_SYNC_MONITORING_DISABLED}" ] || [ "${BLOCK_SYNC_MONITORING_DISABLED}" -ne 1 ]; then
+  ash -c "nohup python monitoring/monitor_block_sync.py > /dev/stdout 2>&1 &"
+fi
 ash -c "nohup ${GETH_CMD//\*/\\\*} > /dev/stdout 2>&1 &"
 
 for i in $(seq 1 300); do
