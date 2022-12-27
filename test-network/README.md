@@ -54,7 +54,7 @@ Move `genesis.json` and `static-nodes.json` for the Validator network.
 
 Initialize the node. You need to run only the first time.
 ```
-$ docker run --name validatorInit -e PRIVATE_CONFIG=ignore -v {mount_directory}:/eth \
+$ docker run --rm --name validatorInit -e PRIVATE_CONFIG=ignore -v {mount_directory}:/eth \
     ghcr.io/boostryjp/ibet-testnet/validator:{version} \
     geth --datadir /eth --nousb init /eth/genesis.json_init
 ```
@@ -100,7 +100,7 @@ if a General node, the Bridge node must be set as the connection node.
 
 Initialize the node. You need to run only the first time.
 ```
-$ docker run --name generalInit -e PRIVATE_CONFIG=ignore -v {mount_directory}:/eth \
+$ docker run --rm --name generalInit -e PRIVATE_CONFIG=ignore -v {mount_directory}:/eth \
     ghcr.io/boostryjp/ibet-testnet/general:{version} \
     geth --datadir /eth --nousb init /eth/genesis.json_init
 ```
