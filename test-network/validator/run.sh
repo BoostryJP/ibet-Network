@@ -4,12 +4,14 @@ mkdir -p /eth/geth
 test ! -z "${rpccorsdomain}" && CORS_OPT="--http.corsdomain ${rpccorsdomain}"
 test ! -z "${rpcvhosts}" && VHOST_OPT="--http.vhosts ${rpcvhosts}"
 test ! -z "${maxpeers}" && PEERS_OPT="--maxpeers ${maxpeers}"
+test ! -z "${identity}" && IDENTITY_OPT="--identity ${identity}"
 
 GETH_CMD="geth \
 --http \
 --http.addr 0.0.0.0 \
 --http.port 8545 \
 ${CORS_OPT} \
+${IDENTITY_OPT} \
 --datadir /eth \
 --port 30303 \
 --http.api admin,debug,miner,txpool,eth,net,web3,istanbul,personal \
