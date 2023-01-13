@@ -61,7 +61,7 @@ $ docker run --rm --name validatorInit -e PRIVATE_CONFIG=ignore -v {mount_direct
 
 Finally, start the node as follows.
 ```
-$ docker run -d --name validator -e PRIVATE_CONFIG=ignore -v ./:/eth \
+$ docker run -d --name validator -e PRIVATE_CONFIG=ignore -e nodekeyhex={nodekey} -v ./:/eth \
     ghcr.io/boostryjp/ibet-network/validator:{version} run.sh
 ```
 
