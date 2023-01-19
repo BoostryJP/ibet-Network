@@ -59,7 +59,11 @@ ibet-Networkのリポジトリは、以下の方針でバージョン管理さ�
 
 ## Quorum バージョン
 
-現状、ibet では Quorum [v22.4.4](https://github.com/ConsenSys/quorum/releases/tag/v22.4.4) を利用しています。
+現在、ibet Network は Quorum の v22.7.5 をベースにしたノードクライアントを利用して構築されています。
+ノードアプリケーションは ibet Network 向けに最適化されて、Quorum 本体のものとは部分的に異なります。
+詳細は以下のプロジェクトをご参照ください。
+
+[BoostryJP/quorum](https://github.com/BoostryJP/quorum)
 
 ## コンセンサスプロトコル
 
