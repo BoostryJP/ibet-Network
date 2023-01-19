@@ -5,9 +5,9 @@ WORKDIR /work
 
 RUN apk add --no-cache make gcc musl-dev linux-headers git
 
-RUN git clone https://github.com/ConsenSys/quorum.git && \
+RUN git clone https://github.com/BoostryJP/quorum.git && \
     cd quorum/ && \
-    git checkout v22.4.4
+    git checkout v2.1.0
 RUN cd quorum/ && \
     make geth bootnode && \
     mv build/bin/geth /usr/local/bin && \
