@@ -70,7 +70,7 @@ In our ibet network we use [QBFT](https://arxiv.org/abs/2002.03613) as a consens
 
 ## EVM Version
 
-Our ibet network EVM version is byzantium. Therefore, smart contracts need to be compiled for this EVM version.
+Our ibet network EVM version is `berlin`. Therefore, smart contracts need to be compiled for this EVM version.
 
 ## How to Join the ibet Network
 
