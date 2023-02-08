@@ -58,7 +58,7 @@ The repository of ibet-Network will be version controlled by the following polic
 
 ## Quorum Version
 
-Currently, the ibet Network is built using a node client based on [v22.7.5](https://github.com/ConsenSys/quorum/releases/tag/v22.7.5) of Quorum. 
+Currently, the ibet Network is built using a node client based on [v22.7.6](https://github.com/ConsenSys/quorum/releases/tag/v22.7.6) of Quorum. 
 The node application has been optimized for ibet Network and partially differs from that of Quorum itself.
 For more information, please refer to the following project.
 
