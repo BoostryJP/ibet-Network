@@ -14,7 +14,7 @@ RUN cd quorum/ && \
     mv build/bin/bootnode /usr/local/bin
 
 # Pull Geth into a second stage deploy alpine container
-FROM alpine:3.14
+FROM alpine:3.17
 
 RUN apk add --no-cache ca-certificates
 COPY --from=builder /usr/local/bin/geth /usr/local/bin/
