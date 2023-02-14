@@ -20,7 +20,7 @@ GETH_CMD="geth \
 --http.corsdomain ${rpccorsdomain} \
 --http.vhosts ${rpcvhosts} \
 --allow-insecure-unlock \
---verbosity 2 \
+--verbosity 3 \
 --nodiscover \
 --miner.gasprice 0 \
 --miner.gastarget 800000000 \
