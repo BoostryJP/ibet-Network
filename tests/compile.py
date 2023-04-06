@@ -44,7 +44,7 @@ spec = {
         }
     },
     "settings": {
-        "evmVersion": "byzantium",
+        "evmVersion": "berlin",
         "optimizer": {
             "enabled": True,
             "runs": 200

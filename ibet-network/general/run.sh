@@ -5,12 +5,14 @@ test ! -z "${rpccorsdomain}" && CORS_OPT="--http.corsdomain ${rpccorsdomain}"
 test ! -z "${rpcvhosts}" && VHOST_OPT="--http.vhosts ${rpcvhosts}"
 test ! -z "${maxpeers}" && PEERS_OPT="--maxpeers ${maxpeers}"
 test ! -z "${syncmode}" && SYNCMODE_OPT="--syncmode ${syncmode}"
+test ! -z "${identity}" && IDENTITY_OPT="--identity ${identity}"
 
 GETH_CMD="geth \
 --http \
 --http.addr 0.0.0.0 \
 --http.port 8545 \
 ${CORS_OPT} \
+${IDENTITY_OPT} \
 --datadir /eth \
 --port 30303 \
 --http.api admin,debug,miner,txpool,eth,net,web3,istanbul,personal \
@@ -26,7 +28,9 @@ ${PEERS_OPT} \
 ${SYNCMODE_OPT} \
 --nousb"
 
-ash -c "nohup python monitoring/monitor_block_sync.py > /dev/stdout 2>&1 &"
+if [ -z "${BLOCK_SYNC_MONITORING_DISABLED}" ] || [ "${BLOCK_SYNC_MONITORING_DISABLED}" -ne 1 ]; then
+  ash -c "nohup python monitoring/monitor_block_sync.py > /dev/stdout 2>&1 &"
+fi
 ash -c "nohup ${GETH_CMD//\*/\\\*} > /dev/stdout 2>&1 &"
 
 for i in $(seq 1 300); do

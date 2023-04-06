@@ -1,8 +1,10 @@
 # ibet-Network
 
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-2.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.1-blue.svg?cacheSeconds=2592000" />
 </p>
+
+English | [日本語](./README_JA.md)
 
 <img width="33%" align="right" src="https://user-images.githubusercontent.com/963333/130191619-f1f0c342-ab8f-499d-b8f8-52309c13d2cb.png"/>
 
@@ -56,7 +58,11 @@ The repository of ibet-Network will be version controlled by the following polic
 
 ## Quorum Version
 
-Currently, ibet is using [v22.4.4](https://github.com/ConsenSys/quorum/releases/tag/v22.4.4) of Quorum.
+Currently, the ibet Network is built using a node client based on [v22.7.6](https://github.com/ConsenSys/quorum/releases/tag/v22.7.6) of Quorum. 
+The node application has been optimized for ibet Network and partially differs from that of Quorum itself.
+For more information, please refer to the following project.
+
+[BoostryJP/quorum](https://github.com/BoostryJP/quorum)
 
 ## Consensus Protocol
 
@@ -64,7 +70,7 @@ In our ibet network we use [QBFT](https://arxiv.org/abs/2002.03613) as a consens
 
 ## EVM Version
 
-Our ibet network EVM version is byzantium. Therefore, smart contracts need to be compiled for this EVM version.
+Our ibet network EVM version is `berlin`. Therefore, smart contracts need to be compiled for this EVM version.
 
 ## How to Join the ibet Network
 

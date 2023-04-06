@@ -16,7 +16,11 @@ limitations under the License.
 
 SPDX-License-Identifier: Apache-2.0
 """
+import pytest
+from eth_utils import to_checksum_address
+
 from web3 import Web3
+from web3.exceptions import BadFunctionCallOutput
 from web3.middleware import geth_poa_middleware
 from web3.datastructures import AttributeDict
 
@@ -474,3 +478,33 @@ class TestE2E:
 
         # Assertion
         assert txn_receipt["status"] == 0
+
+    # <Error_4>
+    # Occur REVERT
+    # Calls to non-existent attribute cause revert.
+    def test_error_4(self):
+        contract_json = ContractUtils.get_contract_json()
+
+        not_deployed_func = {
+            "inputs": [],
+            "name": "notExistAttribute",
+            "outputs": [{
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }],
+            "stateMutability": "view",
+            "type": "function"
+        }
+        # Inject invalid contract function to ABI
+        contract_json["abi"].append(not_deployed_func)
+
+        # Create contract object with invalid ABI
+        contract_with_invalid_abi = web3.eth.contract(
+            address=to_checksum_address(DEPLOYED_CONTRACT_ADDRESS),
+            abi=contract_json['abi'],
+        )
+        _function = getattr(contract_with_invalid_abi.functions, "notExistAttribute")
+        args = []
+        with pytest.raises(BadFunctionCallOutput):
+            _ = _function(*args).call()

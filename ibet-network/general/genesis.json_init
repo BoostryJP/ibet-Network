@@ -7,9 +7,14 @@
         "eip155Block": 3,
         "eip158Block": 3,
         "byzantiumBlock": 3,
+        "constantinopleBlock": 999999999,
+        "petersburgBlock": 999999999,
+        "istanbulBlock": 999999999,
+        "berlinBlock": 999999999,
         "istanbul": {
             "epoch": 30000,
-            "policy": 0
+            "policy": 0,
+            "testQBFTBlock": 100000000
         },
         "isQuorum": true
     },
