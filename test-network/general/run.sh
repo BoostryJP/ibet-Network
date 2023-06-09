@@ -55,7 +55,7 @@ function trap_sigint() {
   done
   exit 0
 }
-trap trap_sigint INT
+trap trap_sigint SIGINT SIGTERM
 
 while :; do
   sleep 5
