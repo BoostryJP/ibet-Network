@@ -17,34 +17,41 @@ limitations under the License.
 SPDX-License-Identifier: Apache-2.0
 """
 import logging
-from logging.config import dictConfig
 import os
 import sys
 import time
+from logging.config import dictConfig
 
 from requests.exceptions import ConnectionError
 from web3 import Web3
 
 BLOCK_SYNC_MONITORING_INTERVAL = os.environ.get("BLOCK_SYNC_MONITORING_INTERVAL") or 30
-MINIMUM_INCREMENTAL_NUMBER = os.environ.get("BLOCK_SYNC_MONITORING_MINIMUM_INCREMENTAL_NUMBER") or 1
+MINIMUM_INCREMENTAL_NUMBER = (
+    os.environ.get("BLOCK_SYNC_MONITORING_MINIMUM_INCREMENTAL_NUMBER") or 1
+)
 
 web3 = Web3(Web3.HTTPProvider("http://localhost:8545"))
 
-LOG_CONFIG = ({
+LOG_CONFIG = {
     "version": 1,
-    "handlers": {"console": {
-        "class": "logging.StreamHandler",
-        "stream": sys.stdout,
-    }},
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "stream": sys.stdout,
+        }
+    },
     "loggers": {
         "monitor": {
-            "handlers": ["console", ],
+            "handlers": [
+                "console",
+            ],
             "propagate": False,
-        }},
+        }
+    },
     "root": {
         "level": "INFO",
-    }
-})
+    },
+}
 dictConfig(LOG_CONFIG)
 log_fmt = "%(levelname)s [%(asctime)s|MONITOR-BLOCK-SYNC] %(message)s"
 logging.basicConfig(format=log_fmt)
@@ -58,7 +65,9 @@ def monitor_block_sync(start_block_number):
     """
     try:
         latest_block_number = web3.eth.blockNumber
-        if latest_block_number - start_block_number > MINIMUM_INCREMENTAL_NUMBER:  # Normal
+        if (
+            latest_block_number - start_block_number > MINIMUM_INCREMENTAL_NUMBER
+        ):  # Normal
             logging.info(
                 f"Blocks are successfully synchronized: "
                 f"start={start_block_number}, "
@@ -74,7 +83,9 @@ def monitor_block_sync(start_block_number):
     except ConnectionError:
         logging.warning("Unable to connect to node")
     except Exception as err:
-        logging.exception("An exception occurred while monitoring block synchronization: ", err)
+        logging.exception(
+            "An exception occurred while monitoring block synchronization: ", err
+        )
     finally:
         return start_block_number
 
