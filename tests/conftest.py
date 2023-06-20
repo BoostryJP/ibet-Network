@@ -21,7 +21,6 @@ import os
 import sys
 
 import pytest
-from web3 import Web3
 
 path = os.path.join(os.path.dirname(__file__), "../")
 sys.path.append(path)
