@@ -19,27 +19,29 @@ SPDX-License-Identifier: Apache-2.0
 import json
 from typing import Tuple
 
-from eth_utils import to_checksum_address
 from eth_keyfile import decode_keyfile_json
+from eth_typing import Address
+from eth_utils import to_checksum_address
 from web3 import Web3
 from web3.middleware import geth_poa_middleware
 
 from tests.config import (
-    CONTRACT_PATH,
-    CONTRACT_NAME,
     ACCOUNT_NAME,
     ACCOUNT_PASSWORD,
-    WEB3_HTTP_PROVIDER,
     CHAIN_ID,
-    TX_GAS_LIMIT
+    CONTRACT_NAME,
+    CONTRACT_PATH,
+    TX_GAS_LIMIT,
+    WEB3_HTTP_PROVIDER,
 )
 
 web3 = Web3(Web3.HTTPProvider(WEB3_HTTP_PROVIDER))
 web3.middleware_onion.inject(geth_poa_middleware, layer=0)
+web3.strict_bytes_type_checking = False
 
 
 class TestAccount:
-    address: str
+    address: Address
     password: str
     keystore_json: dict
     private_key: bytes
@@ -50,8 +52,7 @@ class TestAccount:
         address = to_checksum_address(f'0x{keystore_json["address"]}')
         password = ACCOUNT_PASSWORD
         private_key = decode_keyfile_json(
-            raw_keyfile_json=keystore_json,
-            password=password.encode("utf-8")
+            raw_keyfile_json=keystore_json, password=password.encode("utf-8")
         )
         setattr(cls, "address", address)
         setattr(cls, "password", password)
@@ -60,7 +61,6 @@ class TestAccount:
 
 
 class ContractUtils:
-
     @staticmethod
     def deploy_contract(_args: list) -> Tuple[str, dict, str]:
         """Deploy contract"""
@@ -72,26 +72,25 @@ class ContractUtils:
         )
 
         # Build transaction
-        tx = contract.constructor(*_args).buildTransaction(
+        tx = contract.constructor(*_args).build_transaction(
             transaction={
                 "chainId": CHAIN_ID,
                 "from": TestAccount.address,
                 "gas": TX_GAS_LIMIT,
-                "gasPrice": 0
+                "gasPrice": 0,
             }
         )
         # Send transaction
         tx_hash, txn_receipt = ContractUtils.send_transaction(
-            transaction=tx,
-            private_key=TestAccount.private_key
+            transaction=tx, private_key=TestAccount.private_key
         )
 
         contract_address = None
         if txn_receipt is not None:
-            if 'contractAddress' in txn_receipt.keys():
-                contract_address = txn_receipt['contractAddress']
+            if "contractAddress" in txn_receipt.keys():
+                contract_address = txn_receipt["contractAddress"]
 
-        return contract_address, contract_json['abi'], tx_hash
+        return contract_address, contract_json["abi"], tx_hash
 
     @staticmethod
     def get_contract(contract_address: str):
@@ -99,7 +98,7 @@ class ContractUtils:
         contract_json = ContractUtils.get_contract_json()
         contract = web3.eth.contract(
             address=to_checksum_address(contract_address),
-            abi=contract_json['abi'],
+            abi=contract_json["abi"],
         )
         return contract
 
@@ -115,17 +114,15 @@ class ContractUtils:
         _tx_from = transaction["from"]
 
         # Get nonce
-        nonce = web3.eth.getTransactionCount(_tx_from)
+        nonce = web3.eth.get_transaction_count(_tx_from)
         transaction["nonce"] = nonce
         signed_tx = web3.eth.account.sign_transaction(
-            transaction_dict=transaction,
-            private_key=private_key
+            transaction_dict=transaction, private_key=private_key
         )
         # Send Transaction
-        tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction.hex())
-        txn_receipt = web3.eth.waitForTransactionReceipt(
-            transaction_hash=tx_hash,
-            timeout=10
+        tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction.hex())
+        txn_receipt = web3.eth.wait_for_transaction_receipt(
+            transaction_hash=tx_hash, timeout=10
         )
         if txn_receipt["status"] == 0:
             raise Exception("Error:waitForTransactionReceipt")

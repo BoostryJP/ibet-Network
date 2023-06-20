@@ -16,12 +16,14 @@ limitations under the License.
 
 SPDX-License-Identifier: Apache-2.0
 """
+import logging
 import os
 import sys
-import logging
-import pytest
 
-path = os.path.join(os.path.dirname(__file__), '../')
+import pytest
+from web3 import Web3
+
+path = os.path.join(os.path.dirname(__file__), "../")
 sys.path.append(path)
 
 from tests.util import ContractUtils
@@ -38,7 +40,7 @@ def contract():
         "test text",
         1,
         2,
-        b'abc'
+        b"abc",
     ]
     contract_address, _, _ = ContractUtils.deploy_contract(args)
     return ContractUtils.get_contract(contract_address)
