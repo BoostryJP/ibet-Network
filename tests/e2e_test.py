@@ -20,7 +20,7 @@ import pytest
 from eth_utils import to_checksum_address
 
 from web3 import Web3
-from web3.exceptions import BadFunctionCallOutput
+from web3.exceptions import BadFunctionCallOutput, ContractLogicError
 from web3.middleware import geth_poa_middleware
 from web3.datastructures import AttributeDict
 
@@ -506,5 +506,5 @@ class TestE2E:
         )
         _function = getattr(contract_with_invalid_abi.functions, "notExistAttribute")
         args = []
-        with pytest.raises(BadFunctionCallOutput):
+        with pytest.raises(ContractLogicError):
             _ = _function(*args).call()
