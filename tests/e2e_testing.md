@@ -6,7 +6,7 @@ This document describes how to run network end-to-end non-degrade tests.
 
 - Need to set up a `local-network` beforehand (see [instructions](https://github.com/BoostryJP/ibet-Network/tree/develop/local-network)).
 - E2E tests are run using pytest. Therefore, Python runtime environment is required.
-  - 3.8 or greater.
+  - 3.9 or greater.
 
 ## Setting environment variables
 
