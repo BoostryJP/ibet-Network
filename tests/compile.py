@@ -22,14 +22,10 @@ import sys
 
 import solcx
 
-path = os.path.join(os.path.dirname(__file__), '../')
+path = os.path.join(os.path.dirname(__file__), "../")
 sys.path.append(path)
 
-from tests.config import (
-    SOLC_VERSION_PRAGMA,
-    CONTRACT_PATH,
-    CONTRACT_NAME
-)
+from tests.config import CONTRACT_NAME, CONTRACT_PATH, SOLC_VERSION_PRAGMA
 
 # Install Solc
 solcx.install_solc_pragma(SOLC_VERSION_PRAGMA)
@@ -39,29 +35,25 @@ version = solcx.get_installed_solc_versions()[0]
 spec = {
     "language": "Solidity",
     "sources": {
-        f"{CONTRACT_NAME}.sol": {
-            "urls": [f"{CONTRACT_PATH}/{CONTRACT_NAME}.sol"]
-        }
+        f"{CONTRACT_NAME}.sol": {"urls": [f"{CONTRACT_PATH}/{CONTRACT_NAME}.sol"]}
     },
     "settings": {
         "evmVersion": "berlin",
-        "optimizer": {
-            "enabled": True,
-            "runs": 200
-        },
+        "optimizer": {"enabled": True, "runs": 200},
         "outputSelection": {
             "*": {
                 "*": [
-                    "abi", "evm.bytecode.object", "evm.deployedBytecode.object",
+                    "abi",
+                    "evm.bytecode.object",
+                    "evm.deployedBytecode.object",
                 ]
             }
-        }
-    }
+        },
+    },
 }
 contract_json = solcx.compile_standard(
-    spec,
-    allow_paths=[os.path.dirname(os.path.abspath(__file__))],
-    solc_version=version)
+    spec, allow_paths=[os.path.dirname(os.path.abspath(__file__))], solc_version=version
+)
 
 # Output File
 contract_json = contract_json["contracts"][f"{CONTRACT_NAME}.sol"][CONTRACT_NAME]
