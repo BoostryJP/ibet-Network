@@ -2,9 +2,9 @@ version: '3'
 services:
   validator-0:
     hostname: validator-0
-    image: ghcr.io/boostryjp/ibet-localnet/validator:v2.2.2
+    build: ./validator
     volumes:
-      - /home/ubuntu/quorum_data/v0:/eth
+      - ./quorum_data/v0:/eth
     environment:
       - PRIVATE_CONFIG=ignore
       - rpccorsdomain=*
@@ -21,12 +21,12 @@ services:
     networks:
       app_net:
         ipv4_address: 172.16.239.10
-    restart: always
+    # restart: always
   validator-1:
     hostname: validator-1
-    image: ghcr.io/boostryjp/ibet-localnet/validator:v2.2.2
+    build: ./validator
     volumes:
-      - /home/ubuntu/quorum_data/v1:/eth
+      - ./quorum_data/v1:/eth
     environment:
       - PRIVATE_CONFIG=ignore
       - rpccorsdomain=*
@@ -43,12 +43,12 @@ services:
     networks:
       app_net:
         ipv4_address: 172.16.239.11
-    restart: always
+    # restart: always
   validator-2:
     hostname: validator-2
-    image: ghcr.io/boostryjp/ibet-localnet/validator:v2.2.2
+    build: ./validator
     volumes:
-      - /home/ubuntu/quorum_data/v2:/eth
+      - ./quorum_data/v2:/eth
     environment:
       - PRIVATE_CONFIG=ignore
       - rpccorsdomain=*
@@ -65,12 +65,12 @@ services:
     networks:
       app_net:
         ipv4_address: 172.16.239.12
-    restart: always
+    # restart: always
   validator-3:
     hostname: validator-3
-    image: ghcr.io/boostryjp/ibet-localnet/validator:v2.2.2
+    build: ./validator
     volumes:
-      - /home/ubuntu/quorum_data/v3:/eth
+      - ./quorum_data/v3:/eth
     environment:
       - PRIVATE_CONFIG=ignore
       - rpccorsdomain=*
@@ -87,12 +87,12 @@ services:
     networks:
       app_net:
         ipv4_address: 172.16.239.13
-    restart: always
+    # restart: always
   general-0:
     hostname: general-0
-    image: ghcr.io/boostryjp/ibet-localnet/general:v2.2.2
+    build: ./general
     volumes:
-      - /home/ubuntu/quorum_data/g0:/eth
+      - ./quorum_data/g0:/eth
     environment:
       - PRIVATE_CONFIG=ignore
       - rpccorsdomain=*
@@ -109,7 +109,7 @@ services:
     networks:
       app_net:
         ipv4_address: 172.16.239.14
-    restart: always
+    # restart: always
 networks:
   app_net:
     driver: bridge
