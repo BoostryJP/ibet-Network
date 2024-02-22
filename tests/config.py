@@ -16,11 +16,12 @@ limitations under the License.
 
 SPDX-License-Identifier: Apache-2.0
 """
+
 import os
 
 # Used common
 ZERO_ADDRESS = "0x0000000000000000000000000000000000000000"
-CONTRACT_PATH = "tests/contracts"
+CONTRACT_PATH = f"{os.path.dirname(__file__)}/contracts"
 CONTRACT_NAME = "E2ETest"
 ACCOUNT_NAME = "test_user"
 ACCOUNT_PASSWORD = "password"

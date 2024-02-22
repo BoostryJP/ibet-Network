@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "ibet-Network tests"
+version = "2.3"
+description = "E2E tests from python client to Quorum node containers"
+authors = ["BOOSTRY Co., Ltd. <dev@boostry.co.jp>"]
+
+[tool.poetry.dependencies]
+python = "3.11.2"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.4"
+eth-keyfile = "~0.7.0"
+eth-utils = "~3.0.0"
+py-solc-x = "1.1.1"
+web3 = "~6.15.1"
+isort = "^5.13.2"
+black = "^24.1.1"
+
+[tool.isort]
+profile = "black"
+combine_as_imports = true
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

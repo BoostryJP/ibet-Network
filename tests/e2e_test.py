@@ -16,11 +16,12 @@ limitations under the License.
 
 SPDX-License-Identifier: Apache-2.0
 """
+
 import pytest
-from eth_utils import to_checksum_address
+from eth_utils import keccak, to_checksum_address
 from web3 import Web3
 from web3.datastructures import AttributeDict
-from web3.exceptions import ContractLogicError
+from web3.exceptions import ContractLogicError, TimeExhausted
 from web3.middleware import geth_poa_middleware
 
 from tests.config import (
@@ -508,3 +509,87 @@ class TestE2E:
         args = []
         with pytest.raises(ContractLogicError):
             _ = _function(*args).call()
+
+    # <Error_5>
+    # Occur ERROR
+    # Nonce too low
+    def test_error_5(self, contract):
+        args = [
+            False,
+            "0x0123456789ABCDeF0123456789aBcdEF01234568",
+            "test text2",
+            4,
+            8,
+            b"456789abcdefghijklmnopqrstuvwxyz",
+        ]
+        tx = contract.functions.setItem2(*args, 0).build_transaction(
+            transaction={
+                "chainId": CHAIN_ID,
+                "from": TestAccount.address,
+                "gas": TX_GAS_LIMIT,
+                "gasPrice": 0,
+            }
+        )
+
+        # Get nonce
+        nonce = web3.eth.get_transaction_count(TestAccount.address)
+        tx["nonce"] = nonce
+        signed_tx = web3.eth.account.sign_transaction(
+            transaction_dict=tx, private_key=TestAccount.private_key
+        )
+
+        # Send Transaction (1): success
+        tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction.hex())
+        txn_receipt = web3.eth.wait_for_transaction_receipt(
+            transaction_hash=tx_hash, timeout=10
+        )
+        calculated_tx_hash = keccak(signed_tx.rawTransaction)
+        assert tx_hash == calculated_tx_hash
+        assert tx_hash == txn_receipt["transactionHash"]
+
+        # Send Transaction (2): nonce too low
+        with pytest.raises(
+            ValueError, match="{'code': -32000, 'message': 'nonce too low'}"
+        ):
+            _ = web3.eth.send_raw_transaction(signed_tx.rawTransaction.hex())
+
+    # <Error_6>
+    # Occur ERROR
+    # Already known
+    def test_error_6(self, contract):
+        args = [
+            False,
+            "0x0123456789ABCDeF0123456789aBcdEF01234568",
+            "test text2",
+            4,
+            8,
+            b"456789abcdefghijklmnopqrstuvwxyz",
+        ]
+        tx = contract.functions.setItem2(*args, 0).build_transaction(
+            transaction={
+                "chainId": CHAIN_ID,
+                "from": TestAccount.address,
+                "gas": TX_GAS_LIMIT,
+                "gasPrice": 0,
+            }
+        )
+
+        # Get nonce
+        nonce = web3.eth.get_transaction_count(TestAccount.address)
+        tx["nonce"] = nonce + 1
+        signed_tx = web3.eth.account.sign_transaction(
+            transaction_dict=tx, private_key=TestAccount.private_key
+        )
+
+        # Send Transaction (1): sent but not executed
+        tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction.hex())
+        with pytest.raises(TimeExhausted):
+            _ = web3.eth.wait_for_transaction_receipt(
+                transaction_hash=tx_hash, timeout=10
+            )
+
+        # Send Transaction (2): already known
+        with pytest.raises(
+            ValueError, match="{'code': -32000, 'message': 'already known'}"
+        ):
+            _ = web3.eth.send_raw_transaction(signed_tx.rawTransaction.hex())
