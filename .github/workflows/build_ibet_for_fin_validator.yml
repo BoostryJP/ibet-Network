@@ -24,7 +24,7 @@ jobs:
 
       - name: Get tag name
         id: get_tag_name
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        run: echo VERSION=${GITHUB_REF/refs\/tags\//} >> $GITHUB_OUTPUT
 
       # ibet for Fin (Validator)
       - name: Build and Push (ibet for Fin / Validator)
