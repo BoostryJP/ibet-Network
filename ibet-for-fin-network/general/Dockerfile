@@ -14,7 +14,7 @@ RUN cd quorum/ && \
     mv build/bin/bootnode /usr/local/bin
 
 # Pull Geth into a second stage deploy alpine container
-FROM python:3.9-alpine3.18
+FROM python:3.11-alpine3.19
 
 RUN apk add --no-cache --virtual .build-deps gcc g++
 RUN apk add --no-cache ca-certificates
