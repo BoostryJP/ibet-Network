@@ -1,7 +1,7 @@
 .PHONY: format isort black test
 
 install:
-	pip install -r tests/requirements.txt
+	cd tests && poetry install --no-root --sync
 
 format: isort black
 
@@ -12,4 +12,4 @@ black:
 	black .
 
 test:
-	pytest tests/ ${ARG}
+	cd tests && poetry run pytest -vv . ${ARG}

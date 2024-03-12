@@ -6,7 +6,7 @@ This document describes how to run network end-to-end non-degrade tests.
 
 - Need to set up a `local-network` beforehand (see [instructions](https://github.com/BoostryJP/ibet-Network/tree/develop/local-network)).
 - E2E tests are run using pytest. Therefore, Python runtime environment is required.
-  - 3.9 or greater.
+  - 3.11 or greater.
 
 ## Setting environment variables
 
@@ -20,7 +20,7 @@ This document describes how to run network end-to-end non-degrade tests.
 ### Install python packages
 
 ```shell
-$ pip install -r tests/requirements.txt
+$ make install
 ```
 
 ### Compile the test contract
@@ -30,7 +30,7 @@ The contract code to be tested is `tests/contracts/E2ETest.sol`.
 Compile the contract code.
 
 ````shell
-$ python tests/compile.py 
+$ poetry run python tests/compile.py 
 ````
 
 After successful completion, `E2ETest.json` will be created in tests/contracts.
@@ -48,5 +48,5 @@ $ export DEPLOYED_CONTRACT_ADDRESS=0x79448CB02a0F8cff71005963075187aAD9a050f3
 ### Running the e2e tests
 
 ```shell
-$ pytest tests/
+$ poetry run pytest tests/
 ```
