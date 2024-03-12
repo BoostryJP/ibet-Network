@@ -1,7 +1,10 @@
-.PHONY: format isort black test
+.PHONY: install update format isort black test
 
 install:
 	cd tests && poetry install --no-root --sync
+
+update:
+	cd tests && poetry update
 
 format: isort black
 
