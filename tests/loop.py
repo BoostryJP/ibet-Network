@@ -16,16 +16,20 @@ limitations under the License.
 
 SPDX-License-Identifier: Apache-2.0
 """
-
+import os
 import secrets
+import sys
 
 from eth_utils import keccak, to_checksum_address
 from coincurve import PublicKey
 from web3 import Web3
 from web3.middleware import geth_poa_middleware
 
-from tests.config import WEB3_HTTP_PROVIDER, CHAIN_ID, DEPLOYED_CONTRACT_ADDRESS
-from tests.util import ContractUtils
+path = os.path.join(os.path.dirname(__file__), "../")
+sys.path.append(path)
+
+from config import WEB3_HTTP_PROVIDER, CHAIN_ID, DEPLOYED_CONTRACT_ADDRESS
+from util import ContractUtils
 
 contract = ContractUtils.get_contract(DEPLOYED_CONTRACT_ADDRESS)
 web3 = Web3(Web3.HTTPProvider(WEB3_HTTP_PROVIDER))
