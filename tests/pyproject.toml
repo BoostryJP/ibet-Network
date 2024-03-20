@@ -14,7 +14,7 @@ eth-utils = "~3.0.0"
 py-solc-x = "1.1.1"
 web3 = "~6.15.1"
 isort = "^5.13.2"
-black = "^24.1.1"
+black = "^24.3.0"
 
 [tool.isort]
 profile = "black"
