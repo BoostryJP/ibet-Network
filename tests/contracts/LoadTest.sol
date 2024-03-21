@@ -19,13 +19,27 @@
 
 pragma solidity ^0.8.0;
 
-/// @title Loop 10000
-contract Loop {
+/// @title Contract for load testing
+contract LoadTest {
+
+    struct CommitMessage {
+        uint256 blockNumber;
+        string message;
+    }
+
+    mapping(address => CommitMessage) public commit_messages;
 
     constructor() {}
 
-    /// loop 10000
+    /// Loop 10000
     function loop10000() public {
         for (uint256 i = 0; i < 10000; i++) {}
+    }
+
+    /// Store large string
+    function storeString(string memory _message) public {
+        CommitMessage storage commit_message = commit_messages[msg.sender];
+        commit_message.blockNumber = block.number;
+        commit_message.message = _message;
     }
 }
