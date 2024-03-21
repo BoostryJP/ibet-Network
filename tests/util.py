@@ -50,7 +50,9 @@ class TestAccount:
 
     @classmethod
     def initialize(cls):
-        keystore_json = json.load(open(f"{os.path.dirname(__file__)}/data/{ACCOUNT_NAME}.json", "r"))
+        keystore_json = json.load(
+            open(f"{os.path.dirname(__file__)}/data/{ACCOUNT_NAME}.json", "r")
+        )
         address = to_checksum_address(f'0x{keystore_json["address"]}')
         password = ACCOUNT_PASSWORD
         private_key = decode_keyfile_json(
