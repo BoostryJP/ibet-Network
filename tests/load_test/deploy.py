@@ -17,30 +17,16 @@ limitations under the License.
 SPDX-License-Identifier: Apache-2.0
 """
 
-import logging
 import os
 import sys
 
-import pytest
-
-path = os.path.join(os.path.dirname(__file__), "../")
+path = os.path.join(os.path.dirname(__file__), "../../")
 sys.path.append(path)
 
 from tests.util import ContractUtils
 
-logging.getLogger("web3.providers.HTTPProvider")
-logging.basicConfig(level="DEBUG")
+# Deploy
+args = []
+contract_address, _, _ = ContractUtils.deploy_contract(args)
 
-
-@pytest.fixture(scope="function")
-def contract():
-    args = [
-        True,
-        "0x0123456789abcDEF0123456789abCDef01234567",
-        "test text",
-        1,
-        2,
-        b"abc",
-    ]
-    contract_address, _, _ = ContractUtils.deploy_contract(args)
-    return ContractUtils.get_contract(contract_address)
+print(f"DEPLOYED_CONTRACT_ADDRESS={contract_address}")
