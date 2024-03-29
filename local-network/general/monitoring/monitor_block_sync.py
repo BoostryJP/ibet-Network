@@ -16,6 +16,7 @@ limitations under the License.
 
 SPDX-License-Identifier: Apache-2.0
 """
+
 import logging
 import os
 import sys
@@ -64,7 +65,7 @@ def monitor_block_sync(start_block_number):
     :return: Next monitoring start block number
     """
     try:
-        latest_block_number = web3.eth.blockNumber
+        latest_block_number = web3.eth.block_number
         if (
             latest_block_number - start_block_number > MINIMUM_INCREMENTAL_NUMBER
         ):  # Normal

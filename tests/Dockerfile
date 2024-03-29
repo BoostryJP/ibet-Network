@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 # make application directory
 RUN mkdir -p /app/ibet-Network/
@@ -30,7 +30,8 @@ RUN apt-get update -q \
  language-pack-ja \
  git \
  curl \
- libyaml-cpp-dev
+ libyaml-cpp-dev \
+ liblzma-dev
 
 # remove unnessesory package files
 RUN apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -48,23 +49,32 @@ RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~apl/.bash_profile \
 # install python
 USER apl
 RUN . ~/.bash_profile \
- && pyenv install 3.8.7 \
- && pyenv global 3.8.7 \
- && pip install --upgrade pip
+ && pyenv install 3.11.2 \
+ && pyenv global 3.11.2 \
+ && pip install --upgrade pip setuptools
+
+# install poetry
+RUN . ~/.bash_profile \
+ && python -m pip install poetry==1.7.1
+RUN . ~/.bash_profile \
+ && poetry config virtualenvs.create false
+
+# install python packages
+USER root
+COPY . /app/ibet-Network/tests
+RUN chown -R apl:apl /app/ibet-Network/tests \
+ && find /app/ibet-Network/tests/ -type d -name __pycache__ | xargs rm -fr \
+ && chmod 755 /app/ibet-Network/tests
 
 # install python packages
 USER apl
-COPY tests/requirements.txt /app/requirements.txt
 RUN . ~/.bash_profile \
- && pip install -r /app/requirements.txt \
- && rm -f /app/requirements.txt
+ && cd /app/ibet-Network/tests \
+ && poetry install --no-root \
+ && rm -f /app/ibet-Network/tests/pyproject.toml \
+ && rm -f /app/ibet-Network/tests/poetry.lock
 
-# app deploy
-USER root
-RUN mkdir -p /app/ibet-Network/tests/
-COPY --chown=apl:apl tests/ /app/ibet-Network/tests/
-RUN find /app/ibet-Network/ -type d -name __pycache__ | xargs rm -fr \
- && chmod -R 755 /app/ibet-Network/
+ENV PYTHONPATH /app/ibet-Network/tests
 
 USER apl
 CMD tail -f /dev/null
