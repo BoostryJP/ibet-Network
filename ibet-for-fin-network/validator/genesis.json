@@ -16,6 +16,12 @@
             "policy": 0,
             "testQBFTBlock": 77792450
         },
+        "transitions": [
+            {
+                "block": 999999999,
+                "blockperiodseconds": 10
+            }
+        ],
         "isQuorum": true
     },
     "nonce": "0x0",
