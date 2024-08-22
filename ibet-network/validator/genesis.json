@@ -19,7 +19,7 @@
         "transitions": [
             {
                 "block": 999999999,
-                "blockperiodseconds": 10
+                "emptyBlockPeriodSeconds": 10
             }
         ],
         "isQuorum": true
