@@ -14,6 +14,7 @@ services:
       - identity='validator-0'
       - testQBFTBlock=4
       - berlinBlock=4
+      - emptyBlockPeriodIntroduceBlock=5
       - cache=1024
     ports:
       - '30303:30303'
@@ -36,6 +37,7 @@ services:
       - identity='validator-1'
       - testQBFTBlock=4
       - berlinBlock=4
+      - emptyBlockPeriodIntroduceBlock=5
       - cache=1024
     ports:
       - '30304:30303'
@@ -58,6 +60,7 @@ services:
       - identity='validator-2'
       - testQBFTBlock=4
       - berlinBlock=4
+      - emptyBlockPeriodIntroduceBlock=5
       - cache=1024
     ports:
       - '30305:30303'
@@ -80,6 +83,7 @@ services:
       - identity='validator-3'
       - testQBFTBlock=4
       - berlinBlock=4
+      - emptyBlockPeriodIntroduceBlock=5
       - cache=1024
     ports:
       - '30306:30303'
