@@ -7,7 +7,7 @@ RUN apk add --no-cache make gcc musl-dev linux-headers git
 
 RUN git clone https://github.com/BoostryJP/quorum.git && \
     cd quorum/ && \
-    git checkout v2.3.0
+    git checkout v2.4.0_beta1
 RUN cd quorum/ && \
     make geth bootnode && \
     mv build/bin/geth /usr/local/bin && \
