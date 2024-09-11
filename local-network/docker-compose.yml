@@ -16,6 +16,7 @@ services:
       - berlinBlock=4
       - emptyBlockPeriodIntroduceBlock=5
       - cache=1024
+      - verbosity=3
     ports:
       - '30303:30303'
       - '8545:8545'
@@ -39,6 +40,7 @@ services:
       - berlinBlock=4
       - emptyBlockPeriodIntroduceBlock=5
       - cache=1024
+      - verbosity=3
     ports:
       - '30304:30303'
       - '8546:8545'
@@ -62,6 +64,7 @@ services:
       - berlinBlock=4
       - emptyBlockPeriodIntroduceBlock=5
       - cache=1024
+      - verbosity=3
     ports:
       - '30305:30303'
       - '8547:8545'
@@ -85,6 +88,7 @@ services:
       - berlinBlock=4
       - emptyBlockPeriodIntroduceBlock=5
       - cache=1024
+      - verbosity=3
     ports:
       - '30306:30303'
       - '8548:8545'
@@ -107,6 +111,7 @@ services:
       - berlinBlock=4
       - syncmode=snap
       - cache=2048
+      - verbosity=3
     ports:
       - '30307:30303'
       - '8549:8545'

@@ -20,6 +20,7 @@ GETH_CMD="geth \
 --http.vhosts ${rpcvhosts} \
 --nodiscover \
 --allow-insecure-unlock \
+--verbosity ${verbosity:-3} \
 --metrics \
 --mine \
 --syncmode full \
