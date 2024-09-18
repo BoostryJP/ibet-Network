@@ -5,6 +5,8 @@ echo '{"config":{"chainId":2017,"homesteadBlock":1,"eip150Block":2,"eip150Hash":
 echo '["enode://6204d2b6d844adf9dd23f47027b29b1e39b08c70b8ec05f82a8037f1676c058fe80035b42f32c649cc47347889abfe7732139b9f3f243ea91f990d2d72bb87bd@172.16.239.10:30303?discport=0","enode://a573feff0859205b566385aaf85f4c858dfe4ebb07ec862a2d03e117b3e39d8220aaf1d58750440ad844ddcb623f6becc9ba07fc27db4d30cdf689f15a9b1462@172.16.239.11:30303?discport=0","enode://76b750a2a0c92d2411e4793c714a85cf01e527c7a77f70548e7f363feaf8320039cd0f2eb48235c022d39df44ec06c96060f5c25caeec8a1960a356ebd5473a1@172.16.239.12:30303?discport=0","enode://f53fff2c7ed693b627d4389b92b6d94a11b91f167193a5d31320a2b35fb752f79b3aed7dcc61961bc00b397fdf8729eb797a0b28d6c538d51232164432b67f80@172.16.239.13:30303?discport=0"]' > /eth/geth/static-nodes.json
 geth --datadir "/eth" init "/eth/genesis.json"
 
+test ! -z "${metrics}" && METRICS_OPT="--metrics --metrics.addr 0.0.0.0 --metrics.port 6060"
+
 GETH_CMD="geth \
 --datadir /eth \
 --identity ${identity} \
@@ -18,6 +20,7 @@ GETH_CMD="geth \
 --http.api admin,eth,net,web3,istanbul,personal,txpool,debug \
 --http.corsdomain ${rpccorsdomain} \
 --http.vhosts ${rpcvhosts} \
+${METRICS_OPT} \
 --nodiscover \
 --allow-insecure-unlock \
 --verbosity ${verbosity:-3} \

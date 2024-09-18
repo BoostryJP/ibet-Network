@@ -17,9 +17,11 @@ services:
       - emptyBlockPeriodIntroduceBlock=5
       - cache=1024
       - verbosity=3
+      - metrics=1
     ports:
       - '30303:30303'
       - '8545:8545'
+      - '6060:6060'
     networks:
       app_net:
         ipv4_address: 172.16.239.10
@@ -41,9 +43,11 @@ services:
       - emptyBlockPeriodIntroduceBlock=5
       - cache=1024
       - verbosity=3
+      - metrics=1
     ports:
       - '30304:30303'
       - '8546:8545'
+      - '6061:6060'
     networks:
       app_net:
         ipv4_address: 172.16.239.11
@@ -65,9 +69,11 @@ services:
       - emptyBlockPeriodIntroduceBlock=5
       - cache=1024
       - verbosity=3
+      - metrics=1
     ports:
       - '30305:30303'
       - '8547:8545'
+      - '6062:6060'
     networks:
       app_net:
         ipv4_address: 172.16.239.12
@@ -89,9 +95,11 @@ services:
       - emptyBlockPeriodIntroduceBlock=5
       - cache=1024
       - verbosity=3
+      - metrics=1
     ports:
       - '30306:30303'
       - '8548:8545'
+      - '6063:6060'
     networks:
       app_net:
         ipv4_address: 172.16.239.13
@@ -112,9 +120,11 @@ services:
       - syncmode=snap
       - cache=2048
       - verbosity=3
+      - metrics=1
     ports:
       - '30307:30303'
       - '8549:8545'
+      - '6064:6060'
     networks:
       app_net:
         ipv4_address: 172.16.239.14
