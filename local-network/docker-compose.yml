@@ -2,9 +2,9 @@ version: '3'
 services:
   validator-0:
     hostname: validator-0
-    image: ghcr.io/boostryjp/ibet-localnet/validator:v2.3.0
+    build: ./validator
     volumes:
-      - /home/ubuntu/quorum_data/v0:/eth
+      - v0:/eth
     environment:
       - PRIVATE_CONFIG=ignore
       - rpccorsdomain=*
@@ -16,7 +16,7 @@ services:
       - berlinBlock=4
       - emptyBlockPeriodIntroduceBlock=5
       - cache=1024
-      - verbosity=3
+      - verbosity=5
     ports:
       - '30303:30303'
       - '8545:8545'
@@ -26,9 +26,9 @@ services:
     restart: always
   validator-1:
     hostname: validator-1
-    image: ghcr.io/boostryjp/ibet-localnet/validator:v2.3.0
+    build: ./validator
     volumes:
-      - /home/ubuntu/quorum_data/v1:/eth
+      - v1:/eth
     environment:
       - PRIVATE_CONFIG=ignore
       - rpccorsdomain=*
@@ -40,7 +40,7 @@ services:
       - berlinBlock=4
       - emptyBlockPeriodIntroduceBlock=5
       - cache=1024
-      - verbosity=3
+      - verbosity=5
     ports:
       - '30304:30303'
       - '8546:8545'
@@ -50,9 +50,9 @@ services:
     restart: always
   validator-2:
     hostname: validator-2
-    image: ghcr.io/boostryjp/ibet-localnet/validator:v2.3.0
+    build: ./validator
     volumes:
-      - /home/ubuntu/quorum_data/v2:/eth
+      - v2:/eth
     environment:
       - PRIVATE_CONFIG=ignore
       - rpccorsdomain=*
@@ -64,7 +64,7 @@ services:
       - berlinBlock=4
       - emptyBlockPeriodIntroduceBlock=5
       - cache=1024
-      - verbosity=3
+      - verbosity=5
     ports:
       - '30305:30303'
       - '8547:8545'
@@ -74,9 +74,9 @@ services:
     restart: always
   validator-3:
     hostname: validator-3
-    image: ghcr.io/boostryjp/ibet-localnet/validator:v2.3.0
+    build: ./validator
     volumes:
-      - /home/ubuntu/quorum_data/v3:/eth
+      - v3:/eth
     environment:
       - PRIVATE_CONFIG=ignore
       - rpccorsdomain=*
@@ -88,7 +88,7 @@ services:
       - berlinBlock=4
       - emptyBlockPeriodIntroduceBlock=5
       - cache=1024
-      - verbosity=3
+      - verbosity=5
     ports:
       - '30306:30303'
       - '8548:8545'
@@ -98,20 +98,21 @@ services:
     restart: always
   general-0:
     hostname: general-0
-    image: ghcr.io/boostryjp/ibet-localnet/general:v2.3.0
+    build: ./general
     volumes:
-      - /home/ubuntu/quorum_data/g0:/eth
+      - g0:/eth
     environment:
       - PRIVATE_CONFIG=ignore
       - rpccorsdomain=*
       - rpcvhosts=*
       - maxpeers=*
+      - nodekeyhex='13fe4f966e610ff5ac67965d02fd63a5883c6932a4faa1d2ca974f9e9595adc5'
       - identity='general-0'
       - testQBFTBlock=4
       - berlinBlock=4
       - syncmode=snap
       - cache=2048
-      - verbosity=3
+      - verbosity=5
     ports:
       - '30307:30303'
       - '8549:8545'
@@ -126,3 +127,9 @@ networks:
       driver: default
       config:
       - subnet: 172.16.239.0/24
+volumes:
+  v0:
+  v1:
+  v2:
+  v3:
+  g0:

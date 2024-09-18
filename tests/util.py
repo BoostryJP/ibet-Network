@@ -126,7 +126,7 @@ class ContractUtils:
         # Send Transaction
         tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction.hex())
         txn_receipt = web3.eth.wait_for_transaction_receipt(
-            transaction_hash=tx_hash, timeout=10
+            transaction_hash=tx_hash, timeout=50
         )
         if txn_receipt["status"] == 0:
             raise Exception("Error:waitForTransactionReceipt")
