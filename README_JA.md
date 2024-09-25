@@ -1,12 +1,14 @@
+<p align="center">
+  <img width="33%" src="https://user-images.githubusercontent.com/963333/130191619-f1f0c342-ab8f-499d-b8f8-52309c13d2cb.png"/>
+</p>
+
 # ibet-Network
 
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-2.3-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.4-blue.svg?cacheSeconds=2592000" />
 </p>
 
 [English](./README.md) | 日本語
-
-<img width="33%" align="right" src="https://user-images.githubusercontent.com/963333/130191619-f1f0c342-ab8f-499d-b8f8-52309c13d2cb.png"/>
 
 ## 特徴
 
@@ -59,7 +61,7 @@ ibet-Networkのリポジトリは、以下の方針でバージョン管理さ�
 
 ## Quorum バージョン
 
-現在、ibet Network は Quorum の v23.4.0 をベースにしたノードクライアントを利用して構築されています。
+現在、ibet Network は Quorum の v24.4.0 をベースにしたノードクライアントを利用して構築されています。
 ノードアプリケーションは ibet Network 向けに最適化されて、Quorum 本体のものとは部分的に異なります。
 詳細は以下のプロジェクトをご参照ください。
 

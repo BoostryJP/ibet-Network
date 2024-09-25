@@ -1,12 +1,14 @@
+<p align="center">
+  <img width="33%" src="https://user-images.githubusercontent.com/963333/130191619-f1f0c342-ab8f-499d-b8f8-52309c13d2cb.png"/>
+</p>
+
 # ibet-Network
 
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-2.3-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.4-blue.svg?cacheSeconds=2592000" />
 </p>
 
 English | [日本語](./README_JA.md)
-
-<img width="33%" align="right" src="https://user-images.githubusercontent.com/963333/130191619-f1f0c342-ab8f-499d-b8f8-52309c13d2cb.png"/>
 
 ## Features
 
@@ -58,7 +60,7 @@ The repository of ibet-Network will be version controlled by the following polic
 
 ## Quorum Version
 
-Currently, the ibet Network is built using a node client based on [v23.4.0](https://github.com/ConsenSys/quorum/releases/tag/v23.4.0) of Quorum. 
+Currently, the ibet Network is built using a node client based on [v24.4.0](https://github.com/ConsenSys/quorum/releases/tag/v24.4.0) of Quorum. 
 The node application has been optimized for ibet Network and partially differs from that of Quorum itself.
 For more information, please refer to the following project.
 

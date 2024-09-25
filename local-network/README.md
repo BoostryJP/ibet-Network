@@ -32,3 +32,11 @@ You can migrate an existing network to a Berlin hardfork network with the follow
 2. Update the docker-compose file with a non-zero `berlinBlock`.
  Set a future block number rather than the current block number.
 3. Restart the network.
+
+## Introducing Empty Block Period Seconds
+You can introduce empty block period to an existing network with the following steps:
+
+1. Stop the network.
+2. Update the docker-compose file with a non-zero `emptyBlockPeriodIntroduceBlock`.
+ Set a future block number rather than the current block number.
+3. Restart the network.

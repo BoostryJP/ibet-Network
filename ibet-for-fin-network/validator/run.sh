@@ -22,7 +22,7 @@ ${VHOST_OPT} \
 --mine \
 --syncmode full \
 --miner.gasprice 0 \
---verbosity 2 \
+--verbosity ${verbosity:-2} \
 --nodiscover \
 --miner.gastarget 800000000 \
 ${PEERS_OPT} \

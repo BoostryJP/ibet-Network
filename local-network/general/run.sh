@@ -6,6 +6,7 @@ echo '["enode://6204d2b6d844adf9dd23f47027b29b1e39b08c70b8ec05f82a8037f1676c058f
 geth --datadir "/eth" init "/eth/genesis.json"
 
 test ! -z "${syncmode}" && SYNCMODE_OPT="--syncmode ${syncmode}"
+test ! -z "${metrics}" && METRICS_OPT="--metrics --metrics.addr 0.0.0.0 --metrics.port 6060"
 
 GETH_CMD="geth \
 --datadir /eth \
@@ -19,8 +20,9 @@ GETH_CMD="geth \
 --http.api admin,eth,net,web3,istanbul,personal,txpool,debug \
 --http.corsdomain ${rpccorsdomain} \
 --http.vhosts ${rpcvhosts} \
+${METRICS_OPT} \
 --allow-insecure-unlock \
---verbosity 3 \
+--verbosity ${verbosity:-3} \
 --nodiscover \
 --miner.gasprice 0 \
 --miner.gastarget 800000000 \

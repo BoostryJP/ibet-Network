@@ -20,7 +20,7 @@ ${VHOST_OPT} \
 --networkid 1500002 \
 --nat any \
 --miner.gasprice 0 \
---verbosity 2 \
+--verbosity ${verbosity:-2} \
 --nodiscover \
 --allow-insecure-unlock \
 --miner.gastarget 800000000 \
