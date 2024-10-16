@@ -18,7 +18,7 @@
         },
         "transitions": [
             {
-                "block": 999999999,
+                "block": 174497400,
                 "emptyBlockPeriodSeconds": 10
             }
         ],
