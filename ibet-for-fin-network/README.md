@@ -54,7 +54,7 @@ Initialize the node. You need to run only the first time.
 ```
 $ docker run --rm --name validatorInit -e PRIVATE_CONFIG=ignore -v {mount_directory}:/eth \
     ghcr.io/boostryjp/ibet-fin-network/validator:{version} \
-    geth --datadir /eth --nousb init /eth/genesis.json
+    geth --datadir /eth init /eth/genesis.json
 ```
 
 Finally, start the node as follows.
@@ -99,7 +99,7 @@ Initialize the node. You need to run only the first time.
 ```
 $ docker run --rm --name generalInit -e PRIVATE_CONFIG=ignore -v {mount_directory}:/eth \
     ghcr.io/boostryjp/ibet-fin-network/general:{version} \
-    geth --datadir /eth --nousb init /eth/genesis.json
+    geth --datadir /eth init /eth/genesis.json
 ```
 
 Finally, start the node as follows.

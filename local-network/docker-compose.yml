@@ -1,8 +1,7 @@
-version: '3'
 services:
   validator-0:
     hostname: validator-0
-    image: ghcr.io/boostryjp/ibet-localnet/validator:v2.4.0
+    image: ghcr.io/boostryjp/ibet-localnet/validator:v2.5.0_beta1
     volumes:
       - /home/ubuntu/quorum_data/v0:/eth
     environment:
@@ -28,7 +27,7 @@ services:
     restart: always
   validator-1:
     hostname: validator-1
-    image: ghcr.io/boostryjp/ibet-localnet/validator:v2.4.0
+    image: ghcr.io/boostryjp/ibet-localnet/validator:v2.5.0_beta1
     volumes:
       - /home/ubuntu/quorum_data/v1:/eth
     environment:
@@ -54,7 +53,7 @@ services:
     restart: always
   validator-2:
     hostname: validator-2
-    image: ghcr.io/boostryjp/ibet-localnet/validator:v2.4.0
+    image: ghcr.io/boostryjp/ibet-localnet/validator:v2.5.0_beta1
     volumes:
       - /home/ubuntu/quorum_data/v2:/eth
     environment:
@@ -80,7 +79,7 @@ services:
     restart: always
   validator-3:
     hostname: validator-3
-    image: ghcr.io/boostryjp/ibet-localnet/validator:v2.4.0
+    image: ghcr.io/boostryjp/ibet-localnet/validator:v2.5.0_beta1
     volumes:
       - /home/ubuntu/quorum_data/v3:/eth
     environment:
@@ -106,7 +105,7 @@ services:
     restart: always
   general-0:
     hostname: general-0
-    image: ghcr.io/boostryjp/ibet-localnet/general:v2.4.0
+    image: ghcr.io/boostryjp/ibet-localnet/general:v2.5.0_beta1
     volumes:
       - /home/ubuntu/quorum_data/g0:/eth
     environment:
