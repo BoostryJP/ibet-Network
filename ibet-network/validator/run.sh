@@ -21,12 +21,10 @@ ${VHOST_OPT} \
 --nodekeyhex $nodekeyhex \
 --mine \
 --syncmode full \
---miner.gasprice 0 \
 --verbosity ${verbosity:-2} \
 --nodiscover \
 --miner.gastarget 800000000 \
-${PEERS_OPT} \
---nousb"
+${PEERS_OPT}"
 
 ash -c "nohup ${GETH_CMD//\*/\\\*} > /dev/stdout 2>&1 &"
 
