@@ -19,14 +19,12 @@ ${IDENTITY_OPT} \
 ${VHOST_OPT} \
 --networkid 1010032 \
 --nat any \
---miner.gasprice 0 \
 --verbosity ${verbosity:-2} \
 --nodiscover \
 --allow-insecure-unlock \
 --miner.gastarget 800000000 \
 ${PEERS_OPT} \
-${SYNCMODE_OPT} \
---nousb"
+${SYNCMODE_OPT}"
 
 if [ -z "${BLOCK_SYNC_MONITORING_DISABLED}" ] || [ "${BLOCK_SYNC_MONITORING_DISABLED}" -ne 1 ]; then
   ash -c "nohup python monitoring/monitor_block_sync.py > /dev/stdout 2>&1 &"

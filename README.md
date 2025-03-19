@@ -5,7 +5,7 @@
 # ibet-Network
 
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-2.4-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.5-blue.svg?cacheSeconds=2592000" />
 </p>
 
 English | [日本語](./README_JA.md)

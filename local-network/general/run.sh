@@ -24,11 +24,9 @@ ${METRICS_OPT} \
 --allow-insecure-unlock \
 --verbosity ${verbosity:-3} \
 --nodiscover \
---miner.gasprice 0 \
 --miner.gastarget 800000000 \
 ${SYNCMODE_OPT} \
---cache ${cache} \
---nousb"
+--cache ${cache}"
 
 if [ -z "${BLOCK_SYNC_MONITORING_DISABLED}" ] || [ "${BLOCK_SYNC_MONITORING_DISABLED}" -ne 1 ]; then
   ash -c "nohup python monitoring/monitor_block_sync.py > /dev/stdout 2>&1 &"

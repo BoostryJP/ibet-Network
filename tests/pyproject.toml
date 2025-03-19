@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ibet-Network tests"
-version = "2.3"
+version = "2.5"
 description = "E2E tests from python client to Quorum node containers"
 authors = ["BOOSTRY Co., Ltd. <dev@boostry.co.jp>"]
 
