@@ -6,6 +6,8 @@ echo '["enode://6204d2b6d844adf9dd23f47027b29b1e39b08c70b8ec05f82a8037f1676c058f
 geth --datadir "/eth" init "/eth/genesis.json"
 
 test ! -z "${metrics}" && METRICS_OPT="--metrics --metrics.addr 0.0.0.0 --metrics.port 6060"
+test ! -z "${cache}" && CACHE_OPT="--cache ${cache}"
+test ! -z "${cache_gc}" && CACHE_GC_OPT="--cache.gc ${cache_gc}"
 
 GETH_CMD="geth \
 --datadir /eth \
@@ -28,7 +30,8 @@ ${METRICS_OPT} \
 --mine \
 --syncmode full \
 --miner.gastarget 800000000 \
---cache ${cache}"
+${CACHE_OPT} \
+${CACHE_GC_OPT}"
 
 ash -c "nohup ${GETH_CMD//\*/\\\*} > /dev/stdout 2>&1 &"
 

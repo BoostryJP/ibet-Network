@@ -5,6 +5,8 @@ test ! -z "${rpccorsdomain}" && CORS_OPT="--http.corsdomain ${rpccorsdomain}"
 test ! -z "${rpcvhosts}" && VHOST_OPT="--http.vhosts ${rpcvhosts}"
 test ! -z "${maxpeers}" && PEERS_OPT="--maxpeers ${maxpeers}"
 test ! -z "${identity}" && IDENTITY_OPT="--identity ${identity}"
+test ! -z "${cache}" && CACHE_OPT="--cache ${cache}"
+test ! -z "${cache_gc}" && CACHE_GC_OPT="--cache.gc ${cache_gc}"
 
 GETH_CMD="geth \
 --http \
@@ -24,7 +26,9 @@ ${VHOST_OPT} \
 --verbosity ${verbosity:-2} \
 --nodiscover \
 --miner.gastarget 800000000 \
-${PEERS_OPT}"
+${PEERS_OPT} \
+${CACHE_OPT} \
+${CACHE_GC_OPT}"
 
 ash -c "nohup ${GETH_CMD//\*/\\\*} > /dev/stdout 2>&1 &"
 
