@@ -7,6 +7,8 @@ geth --datadir "/eth" init "/eth/genesis.json"
 
 test ! -z "${syncmode}" && SYNCMODE_OPT="--syncmode ${syncmode}"
 test ! -z "${metrics}" && METRICS_OPT="--metrics --metrics.addr 0.0.0.0 --metrics.port 6060"
+test ! -z "${cache}" && CACHE_OPT="--cache ${cache}"
+test ! -z "${cache_gc}" && CACHE_GC_OPT="--cache.gc ${cache_gc}"
 
 GETH_CMD="geth \
 --datadir /eth \
@@ -26,7 +28,8 @@ ${METRICS_OPT} \
 --nodiscover \
 --miner.gastarget 800000000 \
 ${SYNCMODE_OPT} \
---cache ${cache}"
+${CACHE_OPT} \
+${CACHE_GC_OPT}"
 
 if [ -z "${BLOCK_SYNC_MONITORING_DISABLED}" ] || [ "${BLOCK_SYNC_MONITORING_DISABLED}" -ne 1 ]; then
   ash -c "nohup python monitoring/monitor_block_sync.py > /dev/stdout 2>&1 &"
