@@ -25,7 +25,7 @@ from eth_keyfile import decode_keyfile_json
 from eth_typing import Address
 from eth_utils import to_checksum_address
 from web3 import Web3
-from web3.middleware import geth_poa_middleware
+from web3.middleware import ExtraDataToPOAMiddleware
 
 from tests.config import (
     ACCOUNT_NAME,
@@ -38,7 +38,7 @@ from tests.config import (
 )
 
 web3 = Web3(Web3.HTTPProvider(WEB3_HTTP_PROVIDER))
-web3.middleware_onion.inject(geth_poa_middleware, layer=0)
+web3.middleware_onion.inject(ExtraDataToPOAMiddleware, layer=0)
 web3.strict_bytes_type_checking = False
 
 
@@ -124,7 +124,7 @@ class ContractUtils:
             transaction_dict=transaction, private_key=private_key
         )
         # Send Transaction
-        tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction.hex())
+        tx_hash = web3.eth.send_raw_transaction(signed_tx.raw_transaction.to_0x_hex())
         txn_receipt = web3.eth.wait_for_transaction_receipt(
             transaction_hash=tx_hash, timeout=10
         )
