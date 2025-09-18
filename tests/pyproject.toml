@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ibet-Network tests"
-version = "2.5"
+version = "2.6"
 description = "E2E tests from python client to Quorum node containers"
 authors = ["BOOSTRY Co., Ltd. <dev@boostry.co.jp>"]
 
@@ -9,10 +9,10 @@ python = "3.11.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.4"
-eth-keyfile = "~0.7.0"
-eth-utils = "~3.0.0"
+eth-keyfile = "~0.9.1"
+eth-utils = "~4.1.1"
 py-solc-x = "1.1.1"
-web3 = "~6.15.1"
+web3 = "~6.20.4"
 coincurve = "~21.0.0"
 isort = "^5.13.2"
 black = "^24.3.0"
