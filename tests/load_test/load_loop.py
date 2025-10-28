@@ -24,7 +24,7 @@ import sys
 from coincurve import PublicKey
 from eth_utils import keccak, to_checksum_address
 from web3 import Web3
-from web3.middleware import geth_poa_middleware
+from web3.middleware import ExtraDataToPOAMiddleware
 
 path = os.path.join(os.path.dirname(__file__), "../../")
 sys.path.append(path)
@@ -34,7 +34,7 @@ from tests.util import ContractUtils
 
 contract = ContractUtils.get_contract(DEPLOYED_CONTRACT_ADDRESS)
 web3 = Web3(Web3.HTTPProvider(WEB3_HTTP_PROVIDER))
-web3.middleware_onion.inject(geth_poa_middleware, layer=0)
+web3.middleware_onion.inject(ExtraDataToPOAMiddleware, layer=0)
 web3.strict_bytes_type_checking = False
 
 
@@ -55,4 +55,4 @@ for i in range(10000):
     signed_tx = web3.eth.account.sign_transaction(
         transaction_dict=tx, private_key=private_key
     )
-    tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction.hex())
+    tx_hash = web3.eth.send_raw_transaction(signed_tx.raw_transaction.to_0x_hex())

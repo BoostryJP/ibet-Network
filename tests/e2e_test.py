@@ -21,8 +21,8 @@ import pytest
 from eth_utils import keccak, to_checksum_address
 from web3 import Web3
 from web3.datastructures import AttributeDict
-from web3.exceptions import ContractLogicError, TimeExhausted
-from web3.middleware import geth_poa_middleware
+from web3.exceptions import ContractLogicError, TimeExhausted, Web3RPCError
+from web3.middleware import ExtraDataToPOAMiddleware
 
 from tests.config import (
     CHAIN_ID,
@@ -34,7 +34,7 @@ from tests.config import (
 from tests.util import ContractUtils, TestAccount
 
 web3 = Web3(Web3.HTTPProvider(WEB3_HTTP_PROVIDER))
-web3.middleware_onion.inject(geth_poa_middleware, layer=0)
+web3.middleware_onion.inject(ExtraDataToPOAMiddleware, layer=0)
 
 
 # NOTE:
@@ -226,7 +226,7 @@ class TestE2E:
         ContractUtils.send_transaction(tx, TestAccount.private_key)
         block_to = web3.eth.block_number
         events = contract.events.SetItem.get_logs(
-            fromBlock=block_from, toBlock=block_to
+            from_block=block_from, to_block=block_to
         )
 
         # Assertion
@@ -251,7 +251,7 @@ class TestE2E:
         contract = ContractUtils.get_contract(DEPLOYED_CONTRACT_ADDRESS)
         block_number = contract.functions.optional_item().call()
         events = contract.events.SetItem.get_logs(
-            fromBlock=block_number, toBlock=block_number
+            from_block=block_number, to_block=block_number
         )
 
         # Assertion
@@ -300,83 +300,26 @@ class TestE2E:
         if not isinstance(txpool, dict) and not isinstance(txpool, AttributeDict):
             assert False
 
-    # <Normal_7>
-    # Unlock and send transaction
-    # - personal_listAccounts(Geth API)
-    # - personal_unlockAccounts(Geth API)
-    # - eth_send_transaction
-    # - eth_getTransactionReceipt
-    def test_normal_7(self, contract):
-        # Import raw key
-        try:
-            web3.geth.personal.import_raw_key(
-                TestAccount.private_key, TestAccount.password
-            )
-        except ValueError:
-            pass
-
-        # Unlock account
-        eth_account = web3.geth.personal.list_accounts()[0]
-        web3.geth.personal.unlock_account(eth_account, TestAccount.password, 10)
-
-        # Send transaction
-        args = [
-            False,
-            "0x0123456789ABCDeF0123456789aBcdEF01234568",
-            "test text2",
-            4,
-            8,
-            b"456789abcdefghijklmnopqrstuvwxyz",
-        ]
-        tx = contract.functions.setItem2(*args, 0).build_transaction(
-            transaction={
-                "chainId": CHAIN_ID,
-                "from": eth_account,
-                "gas": TX_GAS_LIMIT,
-                "gasPrice": 0,
-            }
-        )
-        tx_hash = web3.eth.send_transaction(tx)
-        txn_receipt = web3.eth.wait_for_transaction_receipt(
-            transaction_hash=tx_hash, timeout=10
-        )
-
-        # Assertion
-        assert txn_receipt["status"] == 1
-        assert contract.functions.item2_bool().call() is False
-        assert (
-            contract.functions.item2_address().call()
-            == "0x0123456789ABCDeF0123456789aBcdEF01234568"
-        )
-        assert contract.functions.item2_string().call() == "test text2"
-        assert contract.functions.item2_uint().call() == 4
-        assert contract.functions.item2_int().call() == 8
-        assert (
-            contract.functions.item2_bytes().call()
-            == b"456789abcdefghijklmnopqrstuvwxyz"
-        )
-        assert contract.functions.getItemsValueSame().call() == 5
-
-    # <Normal_8_1>
+    # <Normal_7_1>
     # Get bytecode(contract address)
     # - eth_getCode
-    def test_normal_8_1(self, contract):
+    def test_normal_7_1(self, contract):
         # Get bytecode
         bytecode = web3.eth.get_code(contract.address)
 
         # Assertion
         contract_json = ContractUtils.get_contract_json()
-        assert bytecode.hex() == f'0x{contract_json["deployedBytecode"]}'
+        assert bytecode.to_0x_hex() == f'0x{contract_json["deployedBytecode"]}'
 
-    # <Normal_8_2>
+    # <Normal_7_2>
     # Get bytecode(EOA address)
     # - eth_getCode
-    def test_normal_8_2(self, contract):
+    def test_normal_7_2(self, contract):
         # Get bytecode
         bytecode = web3.eth.get_code(TestAccount.address)
 
         # Assertion
-        assert bytecode.hex() == "0x"
+        assert bytecode.to_0x_hex() == "0x"
 
     ###########################################################################
     # Error Case
@@ -408,7 +351,7 @@ class TestE2E:
         signed_tx = web3.eth.account.sign_transaction(
             transaction_dict=tx, private_key=TestAccount.private_key
         )
-        tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction.hex())
+        tx_hash = web3.eth.send_raw_transaction(signed_tx.raw_transaction.to_0x_hex())
         txn_receipt = web3.eth.wait_for_transaction_receipt(
             transaction_hash=tx_hash, timeout=10
         )
@@ -442,7 +385,7 @@ class TestE2E:
         signed_tx = web3.eth.account.sign_transaction(
             transaction_dict=tx, private_key=TestAccount.private_key
         )
-        tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction.hex())
+        tx_hash = web3.eth.send_raw_transaction(signed_tx.raw_transaction.to_0x_hex())
         txn_receipt = web3.eth.wait_for_transaction_receipt(
             transaction_hash=tx_hash, timeout=10
         )
@@ -476,7 +419,7 @@ class TestE2E:
         signed_tx = web3.eth.account.sign_transaction(
             transaction_dict=tx, private_key=TestAccount.private_key
         )
-        tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction.hex())
+        tx_hash = web3.eth.send_raw_transaction(signed_tx.raw_transaction.to_0x_hex())
         txn_receipt = web3.eth.wait_for_transaction_receipt(
             transaction_hash=tx_hash, timeout=10
         )
@@ -539,19 +482,19 @@ class TestE2E:
         )
 
         # Send Transaction (1): success
-        tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction.hex())
+        tx_hash = web3.eth.send_raw_transaction(signed_tx.raw_transaction.to_0x_hex())
         txn_receipt = web3.eth.wait_for_transaction_receipt(
             transaction_hash=tx_hash, timeout=10
         )
-        calculated_tx_hash = keccak(signed_tx.rawTransaction)
+        calculated_tx_hash = keccak(hexstr=signed_tx.raw_transaction.to_0x_hex())
         assert tx_hash == calculated_tx_hash
         assert tx_hash == txn_receipt["transactionHash"]
 
         # Send Transaction (2): nonce too low
         with pytest.raises(
-            ValueError, match="{'code': -32000, 'message': 'nonce too low'}"
+            Web3RPCError, match="{'code': -32000, 'message': 'nonce too low'}"
         ):
-            _ = web3.eth.send_raw_transaction(signed_tx.rawTransaction.hex())
+            _ = web3.eth.send_raw_transaction(signed_tx.raw_transaction.to_0x_hex())
 
     # <Error_6>
     # Occur ERROR
@@ -582,7 +525,7 @@ class TestE2E:
         )
 
         # Send Transaction (1): sent but not executed
-        tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction.hex())
+        tx_hash = web3.eth.send_raw_transaction(signed_tx.raw_transaction.to_0x_hex())
         with pytest.raises(TimeExhausted):
             _ = web3.eth.wait_for_transaction_receipt(
                 transaction_hash=tx_hash, timeout=10
@@ -590,6 +533,6 @@ class TestE2E:
 
         # Send Transaction (2): already known
         with pytest.raises(
-            ValueError, match="{'code': -32000, 'message': 'already known'}"
+            Web3RPCError, match="{'code': -32000, 'message': 'already known'}"
         ):
-            _ = web3.eth.send_raw_transaction(signed_tx.rawTransaction.hex())
+            _ = web3.eth.send_raw_transaction(signed_tx.raw_transaction.to_0x_hex())
