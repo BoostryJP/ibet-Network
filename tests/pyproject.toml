@@ -15,7 +15,7 @@ py-solc-x = "2.0.4"
 web3 = "~7.13.0"
 coincurve = "~21.0.0"
 isort = "^6.0.1"
-black = "^25.1.0"
+black = "^26.3.1"
 
 [tool.isort]
 profile = "black"
