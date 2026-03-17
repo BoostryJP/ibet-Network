@@ -5,7 +5,7 @@ description = "E2E tests from python client to Quorum node containers"
 authors = ["BOOSTRY Co., Ltd. <dev@boostry.co.jp>"]
 
 [tool.poetry.dependencies]
-python = "3.11.2"
+python = "3.13.11"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^9.0.2"
@@ -14,12 +14,6 @@ eth-utils = "~5.3.1"
 py-solc-x = "2.0.5"
 web3 = "~7.14.1"
 coincurve = "~21.0.0"
-isort = "^8.0.1"
-black = "^26.3.1"
-
-[tool.isort]
-profile = "black"
-combine_as_imports = true
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

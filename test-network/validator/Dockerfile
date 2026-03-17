@@ -14,7 +14,7 @@ RUN cd quorum/ && \
     mv build/bin/bootnode /usr/local/bin
 
 # Pull Geth into a second stage deploy alpine container
-FROM alpine:3.17
+FROM alpine:3.23
 
 RUN apk add --no-cache ca-certificates
 COPY --from=builder /usr/local/bin/geth /usr/local/bin/
@@ -22,6 +22,11 @@ COPY --from=builder /usr/local/bin/bootnode /usr/local/bin/
 
 COPY run.sh /run.sh
 COPY healthcheck.sh /healthcheck.sh
+RUN addgroup -g 1000 -S geth && \
+    adduser -u 1000 -S -D -G geth geth && \
+    mkdir -p /eth/geth && \
+    chown -R geth:geth /eth /run.sh /healthcheck.sh
+USER geth
 
 EXPOSE 30303 30303/udp 8545
 
