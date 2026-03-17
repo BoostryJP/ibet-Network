@@ -14,9 +14,9 @@ RUN cd quorum/ && \
     mv build/bin/bootnode /usr/local/bin
 
 # Pull Geth into a second stage deploy alpine container
-FROM python:3.11-alpine3.19
+FROM python:3.13-alpine3.23
 
-RUN apk add --no-cache --virtual .build-deps gcc g++
+RUN apk add --no-cache --virtual .build-deps gcc g++ make
 RUN apk add --no-cache ca-certificates
 COPY --from=builder /usr/local/bin/geth /usr/local/bin/
 COPY --from=builder /usr/local/bin/bootnode /usr/local/bin/
@@ -32,6 +32,11 @@ RUN apk del .build-deps
 COPY ./monitoring/monitor_block_sync.py /monitoring/monitor_block_sync.py
 COPY run.sh /run.sh
 COPY healthcheck.sh /healthcheck.sh
+RUN addgroup -g 1000 -S geth && \
+    adduser -u 1000 -S -D -G geth geth && \
+    mkdir -p /eth/geth && \
+    chown -R geth:geth /eth /monitoring /run.sh /healthcheck.sh
+USER geth
 
 EXPOSE 30303 30303/udp 8545
 

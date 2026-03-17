@@ -430,7 +430,7 @@ class TestE2E:
     # <Error_4>
     # Occur REVERT
     # Calls to non-existent attribute cause revert.
-    def test_error_4(self):
+    def test_error_4(self, contract):
         contract_json = ContractUtils.get_contract_json()
 
         not_deployed_func = {
@@ -445,7 +445,7 @@ class TestE2E:
 
         # Create contract object with invalid ABI
         contract_with_invalid_abi = web3.eth.contract(
-            address=to_checksum_address(DEPLOYED_CONTRACT_ADDRESS),
+            address=to_checksum_address(contract.address),
             abi=contract_json["abi"],
         )
         _function = getattr(contract_with_invalid_abi.functions, "notExistAttribute")
