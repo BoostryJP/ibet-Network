@@ -24,11 +24,6 @@ COPY --from=builder /usr/local/bin/bootnode /usr/local/bin/
 # Deploy scripts
 COPY run.sh /run.sh
 COPY healthcheck.sh /healthcheck.sh
-RUN addgroup -g 1000 -S geth && \
-    adduser -u 1000 -S -D -G geth geth && \
-    mkdir -p /eth/geth && \
-    chown -R geth:geth /eth /run.sh /healthcheck.sh
-USER geth
 
 EXPOSE 30303 30303/udp 8545
 
