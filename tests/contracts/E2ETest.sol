@@ -192,6 +192,56 @@ contract E2ETest {
         return itemsValue;
     }
 
+    /// @notice Call P-256 verification precompile and parse return values.
+    /// @dev Expected precompile address is 0x0100.
+    /// @return callSuccess low-level staticcall result
+    /// @return verified true when return value is 32-byte 0x...01
+    /// @return rawResult raw bytes returned by the precompile
+    function verifyP256Result(
+        bytes32 _hash,
+        bytes32 _r,
+        bytes32 _s,
+        bytes32 _qx,
+        bytes32 _qy
+    )
+        public
+        view
+        returns (
+            bool callSuccess,
+            bool verified,
+            bytes memory rawResult
+        )
+    {
+        (callSuccess, rawResult) = address(0x0100).staticcall(
+            abi.encodePacked(_hash, _r, _s, _qx, _qy)
+        );
+
+        verified = false;
+        if (rawResult.length == 32) {
+            uint256 value;
+            assembly {
+                value := mload(add(rawResult, 32))
+            }
+            verified = (value == 1);
+        }
+    }
+
+    /// @notice Call P-256 verification precompile with arbitrary input bytes.
+    /// @return callSuccess low-level staticcall result
+    /// @return rawResult raw bytes returned by the precompile
+    function verifyP256Raw(
+        bytes calldata _input
+    )
+        external
+        view
+        returns (
+            bool callSuccess,
+            bytes memory rawResult
+        )
+    {
+        (callSuccess, rawResult) = address(0x0100).staticcall(_input);
+    }
+
     /// @notice Get optional item
     /// @param _optional_item optional item
     function setOptionalItem(

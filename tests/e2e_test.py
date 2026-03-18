@@ -18,6 +18,9 @@ SPDX-License-Identifier: Apache-2.0
 """
 
 import pytest
+from Crypto.Hash import SHA256
+from Crypto.PublicKey import ECC
+from Crypto.Signature import DSS
 from eth_utils import keccak, to_checksum_address
 from web3 import Web3
 from web3.datastructures import AttributeDict
@@ -35,6 +38,29 @@ from tests.util import ContractUtils, TestAccount
 
 web3 = Web3(Web3.HTTPProvider(WEB3_HTTP_PROVIDER))
 web3.middleware_onion.inject(ExtraDataToPOAMiddleware, layer=0)
+
+
+def _to_bytes32(value: int) -> bytes:
+    return value.to_bytes(32, byteorder="big")
+
+
+def _get_p256_vector() -> tuple[bytes, bytes, bytes, bytes, bytes]:
+    # Deterministic test vector to keep E2E reproducible.
+    private_key = int(
+        "1f1e1d1c1b1a191817161514131211101f1e1d1c1b1a19181716151413121110", 16
+    )
+    key = ECC.construct(curve="P-256", d=private_key)
+    message = b"ibet-network-p256-e2e"
+    hash_bytes = SHA256.new(message).digest()
+    signature = DSS.new(key, "deterministic-rfc6979", encoding="binary").sign(
+        SHA256.new(message)
+    )
+
+    r_bytes = signature[:32]
+    s_bytes = signature[32:64]
+    qx_bytes = _to_bytes32(int(key.pointQ.x))
+    qy_bytes = _to_bytes32(int(key.pointQ.y))
+    return hash_bytes, r_bytes, s_bytes, qx_bytes, qy_bytes
 
 
 # NOTE:
@@ -321,6 +347,20 @@ class TestE2E:
         # Assertion
         assert bytecode.to_0x_hex() == "0x"
 
+    # <Normal_8_1>
+    # Verify secp256r1 signature by precompile (0x0100)
+    # - eth_call
+    def test_normal_8_1(self, contract):
+        hash_bytes, r_bytes, s_bytes, qx_bytes, qy_bytes = _get_p256_vector()
+        call_success, verified, raw_result = contract.functions.verifyP256Result(
+            hash_bytes, r_bytes, s_bytes, qx_bytes, qy_bytes
+        ).call()
+
+        # Assertion
+        assert call_success is True
+        assert verified is True
+        assert raw_result == (b"\x00" * 31) + b"\x01"
+
     ###########################################################################
     # Error Case
     ###########################################################################
@@ -536,3 +576,34 @@ class TestE2E:
             Web3RPCError, match="{'code': -32000, 'message': 'already known'}"
         ):
             _ = web3.eth.send_raw_transaction(signed_tx.raw_transaction.to_0x_hex())
+
+    # <Error_7_1>
+    # Invalid signature for secp256r1 precompile
+    # - eth_call
+    def test_error_7_1(self, contract):
+        hash_bytes, r_bytes, s_bytes, qx_bytes, qy_bytes = _get_p256_vector()
+        invalid_s = bytes([s_bytes[0] ^ 0x01]) + s_bytes[1:]
+        call_success, verified, raw_result = contract.functions.verifyP256Result(
+            hash_bytes, r_bytes, invalid_s, qx_bytes, qy_bytes
+        ).call()
+
+        # Assertion
+        assert call_success is True
+        assert verified is False
+        assert raw_result == b""
+
+    # <Error_7_2>
+    # Invalid input length for secp256r1 precompile
+    # - eth_call
+    def test_error_7_2(self, contract):
+        hash_bytes, r_bytes, s_bytes, qx_bytes, qy_bytes = _get_p256_vector()
+        valid_input = hash_bytes + r_bytes + s_bytes + qx_bytes + qy_bytes
+        invalid_length_input = valid_input[:-1]
+        call_success, raw_result = contract.functions.verifyP256Raw(
+            invalid_length_input
+        ).call()
+
+        # Assertion
+        assert len(invalid_length_input) == 159
+        assert call_success is True
+        assert raw_result == b""
