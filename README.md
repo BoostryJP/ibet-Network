@@ -24,7 +24,7 @@ This repository manages the following environments.
 - `test-network` : shared test environment for validation and operational checks
 - `local-network` : local environment for development and verification
 
-Sub-README files remain in their conventional locations under each environment directory. For node startup procedures and environment-specific settings, refer to the README in each directory.
+For node startup procedures and environment-specific settings, refer to the README in each directory.
 
 ## Repository Structure
 
