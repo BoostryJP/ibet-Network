@@ -226,10 +226,11 @@ contract E2ETest {
         }
     }
 
-    /// @notice Call P-256 verification precompile with arbitrary input bytes.
+    /// @notice Call arbitrary precompile with raw input bytes.
     /// @return callSuccess low-level staticcall result
     /// @return rawResult raw bytes returned by the precompile
-    function verifyP256Raw(
+    function callPrecompile(
+        address _precompile,
         bytes calldata _input
     )
         external
@@ -239,7 +240,7 @@ contract E2ETest {
             bytes memory rawResult
         )
     {
-        (callSuccess, rawResult) = address(0x0100).staticcall(_input);
+        (callSuccess, rawResult) = _precompile.staticcall(_input);
     }
 
     /// @notice Get optional item
