@@ -7,14 +7,14 @@ RUN apk add --no-cache make gcc musl-dev linux-headers git
 
 RUN git clone https://github.com/BoostryJP/quorum.git && \
     cd quorum/ && \
-    git checkout v2.6.0
+    git checkout v2.7.0
 RUN cd quorum/ && \
     make geth bootnode && \
     mv build/bin/geth /usr/local/bin && \
     mv build/bin/bootnode /usr/local/bin
 
 # Pull Geth into a second stage deploy alpine container
-FROM alpine:3.17
+FROM alpine:3.23
 
 RUN apk add --no-cache ca-certificates
 COPY --from=builder /usr/local/bin/geth /usr/local/bin/

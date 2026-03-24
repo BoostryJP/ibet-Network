@@ -18,6 +18,9 @@ SPDX-License-Identifier: Apache-2.0
 """
 
 import pytest
+from Crypto.Hash import SHA256
+from Crypto.PublicKey import ECC
+from Crypto.Signature import DSS
 from eth_utils import keccak, to_checksum_address
 from web3 import Web3
 from web3.datastructures import AttributeDict
@@ -35,6 +38,57 @@ from tests.util import ContractUtils, TestAccount
 
 web3 = Web3(Web3.HTTPProvider(WEB3_HTTP_PROVIDER))
 web3.middleware_onion.inject(ExtraDataToPOAMiddleware, layer=0)
+
+
+def _hex_to_bytes(value: str) -> bytes:
+    return bytes.fromhex("".join(value.split()))
+
+
+def _precompile_address(value: int) -> str:
+    return Web3.to_checksum_address(f"0x{value:040x}")
+
+
+def _to_bytes32(value: int) -> bytes:
+    return value.to_bytes(32, byteorder="big")
+
+
+def _get_p256_vector() -> tuple[bytes, bytes, bytes, bytes, bytes]:
+    # Deterministic test vector to keep E2E reproducible.
+    private_key = int(
+        "1f1e1d1c1b1a191817161514131211101f1e1d1c1b1a19181716151413121110", 16
+    )
+    key = ECC.construct(curve="P-256", d=private_key)
+    message = b"ibet-network-p256-e2e"
+    hash_bytes = SHA256.new(message).digest()
+    signature = DSS.new(key, "deterministic-rfc6979", encoding="binary").sign(
+        SHA256.new(message)
+    )
+
+    r_bytes = signature[:32]
+    s_bytes = signature[32:64]
+    qx_bytes = _to_bytes32(int(key.pointQ.x))
+    qy_bytes = _to_bytes32(int(key.pointQ.y))
+    return hash_bytes, r_bytes, s_bytes, qx_bytes, qy_bytes
+
+
+_BLS_G1_ADD_INPUT = _hex_to_bytes("""
+    0000000000000000000000000000000017f1d3a73197d7942695638c4fa9ac0fc3688c4f9774b905a14e3a3f171bac586c55e83ff97a1aeffb3af00adb22c6bb0000000000000000000000000000000008b3f481e3aaa0f1a09e30ed741d8ae4fcf5e095d5d00af600db18cb2c04b3edd03cc744a2888ae40caa232946c5e7e10000000000000000000000000000000017f1d3a73197d7942695638c4fa9ac0fc3688c4f9774b905a14e3a3f171bac586c55e83ff97a1aeffb3af00adb22c6bb0000000000000000000000000000000008b3f481e3aaa0f1a09e30ed741d8ae4fcf5e095d5d00af600db18cb2c04b3edd03cc744a2888ae40caa232946c5e7e1
+    """)
+_BLS_G1_ADD_EXPECTED = _hex_to_bytes("""
+    000000000000000000000000000000000572cbea904d67468808c8eb50a9450c9721db309128012543902d0ac358a62ae28f75bb8f1c7c42c39a8c5529bf0f4e00000000000000000000000000000000166a9d8cabc673a322fda673779d8e3822ba3ecb8670e461f73bb9021d5fd76a4c56d9d4cd16bd1bba86881979749d28
+    """)
+_BLS_G2_ADD_INPUT = _hex_to_bytes("""
+    00000000000000000000000000000000024aa2b2f08f0a91260805272dc51051c6e47ad4fa403b02b4510b647ae3d1770bac0326a805bbefd48056c8c121bdb80000000000000000000000000000000013e02b6052719f607dacd3a088274f65596bd0d09920b61ab5da61bbdc7f5049334cf11213945d57e5ac7d055d042b7e000000000000000000000000000000000ce5d527727d6e118cc9cdc6da2e351aadfd9baa8cbdd3a76d429a695160d12c923ac9cc3baca289e193548608b82801000000000000000000000000000000000606c4a02ea734cc32acd2b02bc28b99cb3e287e85a763af267492ab572e99ab3f370d275cec1da1aaa9075ff05f79be00000000000000000000000000000000024aa2b2f08f0a91260805272dc51051c6e47ad4fa403b02b4510b647ae3d1770bac0326a805bbefd48056c8c121bdb80000000000000000000000000000000013e02b6052719f607dacd3a088274f65596bd0d09920b61ab5da61bbdc7f5049334cf11213945d57e5ac7d055d042b7e000000000000000000000000000000000ce5d527727d6e118cc9cdc6da2e351aadfd9baa8cbdd3a76d429a695160d12c923ac9cc3baca289e193548608b82801000000000000000000000000000000000606c4a02ea734cc32acd2b02bc28b99cb3e287e85a763af267492ab572e99ab3f370d275cec1da1aaa9075ff05f79be
+    """)
+_BLS_G2_ADD_EXPECTED = _hex_to_bytes("""
+    000000000000000000000000000000001638533957d540a9d2370f17cc7ed5863bc0b995b8825e0ee1ea1e1e4d00dbae81f14b0bf3611b78c952aacab827a053000000000000000000000000000000000a4edef9c1ed7f729f520e47730a124fd70662a904ba1074728114d1031e1572c6c886f6b57ec72a6178288c47c33577000000000000000000000000000000000468fb440d82b0630aeb8dca2b5256789a66da69bf91009cbfe6bd221e47aa8ae88dece9764bf3bd999d95d71e4c9899000000000000000000000000000000000f6d4552fa65dd2638b361543f887136a43253d9c66c411697003f7a13c308f5422e1aa0a59c8967acdefd8b6e36ccf3
+    """)
+_BLS_PAIRING_FALSE_INPUT = _hex_to_bytes("""
+    0000000000000000000000000000000017f1d3a73197d7942695638c4fa9ac0fc3688c4f9774b905a14e3a3f171bac586c55e83ff97a1aeffb3af00adb22c6bb0000000000000000000000000000000008b3f481e3aaa0f1a09e30ed741d8ae4fcf5e095d5d00af600db18cb2c04b3edd03cc744a2888ae40caa232946c5e7e100000000000000000000000000000000024aa2b2f08f0a91260805272dc51051c6e47ad4fa403b02b4510b647ae3d1770bac0326a805bbefd48056c8c121bdb80000000000000000000000000000000013e02b6052719f607dacd3a088274f65596bd0d09920b61ab5da61bbdc7f5049334cf11213945d57e5ac7d055d042b7e000000000000000000000000000000000ce5d527727d6e118cc9cdc6da2e351aadfd9baa8cbdd3a76d429a695160d12c923ac9cc3baca289e193548608b82801000000000000000000000000000000000606c4a02ea734cc32acd2b02bc28b99cb3e287e85a763af267492ab572e99ab3f370d275cec1da1aaa9075ff05f79be
+    """)
+_BLS_PAIRING_TRUE_INPUT = _BLS_PAIRING_FALSE_INPUT[:128] + (b"\x00" * 256)
+_BLS_PAIRING_RESULT_TRUE = (b"\x00" * 31) + b"\x01"
+_BLS_PAIRING_RESULT_FALSE = b"\x00" * 32
 
 
 # NOTE:
@@ -321,6 +375,68 @@ class TestE2E:
         # Assertion
         assert bytecode.to_0x_hex() == "0x"
 
+    # <Normal_8>
+    # Verify secp256r1 signature by precompile (0x0100)
+    # - eth_call
+    def test_normal_8(self, contract):
+        hash_bytes, r_bytes, s_bytes, qx_bytes, qy_bytes = _get_p256_vector()
+        call_success, verified, raw_result = contract.functions.verifyP256Result(
+            hash_bytes, r_bytes, s_bytes, qx_bytes, qy_bytes
+        ).call()
+
+        # Assertion
+        assert call_success is True
+        assert verified is True
+        assert raw_result == (b"\x00" * 31) + b"\x01"
+
+    # <Normal_9_1>
+    # BLS12-381 G1Add precompile (0x0b)
+    # - eth_call
+    def test_normal_9_1(self, contract):
+        call_success, raw_result = contract.functions.callPrecompile(
+            _precompile_address(0x0B), _BLS_G1_ADD_INPUT
+        ).call()
+
+        # Assertion
+        assert call_success is True
+        assert raw_result == _BLS_G1_ADD_EXPECTED
+
+    # <Normal_9_2>
+    # BLS12-381 G2Add precompile (0x0d)
+    # - eth_call
+    def test_normal_9_2(self, contract):
+        call_success, raw_result = contract.functions.callPrecompile(
+            _precompile_address(0x0D), _BLS_G2_ADD_INPUT
+        ).call()
+
+        # Assertion
+        assert call_success is True
+        assert raw_result == _BLS_G2_ADD_EXPECTED
+
+    # <Normal_9_3>
+    # BLS12-381 Pairing precompile true case (0x0f)
+    # - eth_call
+    def test_normal_9_3(self, contract):
+        call_success, raw_result = contract.functions.callPrecompile(
+            _precompile_address(0x0F), _BLS_PAIRING_TRUE_INPUT
+        ).call()
+
+        # Assertion
+        assert call_success is True
+        assert raw_result == _BLS_PAIRING_RESULT_TRUE
+
+    # <Normal_9_4>
+    # BLS12-381 Pairing precompile false case (0x0f)
+    # - eth_call
+    def test_normal_9_4(self, contract):
+        call_success, raw_result = contract.functions.callPrecompile(
+            _precompile_address(0x0F), _BLS_PAIRING_FALSE_INPUT
+        ).call()
+
+        # Assertion
+        assert call_success is True
+        assert raw_result == _BLS_PAIRING_RESULT_FALSE
+
     ###########################################################################
     # Error Case
     ###########################################################################
@@ -430,7 +546,7 @@ class TestE2E:
     # <Error_4>
     # Occur REVERT
     # Calls to non-existent attribute cause revert.
-    def test_error_4(self):
+    def test_error_4(self, contract):
         contract_json = ContractUtils.get_contract_json()
 
         not_deployed_func = {
@@ -445,7 +561,7 @@ class TestE2E:
 
         # Create contract object with invalid ABI
         contract_with_invalid_abi = web3.eth.contract(
-            address=to_checksum_address(DEPLOYED_CONTRACT_ADDRESS),
+            address=to_checksum_address(contract.address),
             abi=contract_json["abi"],
         )
         _function = getattr(contract_with_invalid_abi.functions, "notExistAttribute")
@@ -536,3 +652,48 @@ class TestE2E:
             Web3RPCError, match="{'code': -32000, 'message': 'already known'}"
         ):
             _ = web3.eth.send_raw_transaction(signed_tx.raw_transaction.to_0x_hex())
+
+    # <Error_7_1>
+    # Invalid signature for secp256r1 precompile
+    # - eth_call
+    def test_error_7_1(self, contract):
+        hash_bytes, r_bytes, s_bytes, qx_bytes, qy_bytes = _get_p256_vector()
+        invalid_s = bytes([s_bytes[0] ^ 0x01]) + s_bytes[1:]
+        call_success, verified, raw_result = contract.functions.verifyP256Result(
+            hash_bytes, r_bytes, invalid_s, qx_bytes, qy_bytes
+        ).call()
+
+        # Assertion
+        assert call_success is True
+        assert verified is False
+        assert raw_result == b""
+
+    # <Error_7_2>
+    # Invalid input length for secp256r1 precompile
+    # - eth_call
+    def test_error_7_2(self, contract):
+        hash_bytes, r_bytes, s_bytes, qx_bytes, qy_bytes = _get_p256_vector()
+        valid_input = hash_bytes + r_bytes + s_bytes + qx_bytes + qy_bytes
+        invalid_length_input = valid_input[:-1]
+        call_success, raw_result = contract.functions.callPrecompile(
+            _precompile_address(0x0100), invalid_length_input
+        ).call()
+
+        # Assertion
+        assert len(invalid_length_input) == 159
+        assert call_success is True
+        assert raw_result == b""
+
+    # <Error_8>
+    # Invalid input length for BLS12-381 Pairing precompile
+    # - eth_call
+    def test_error_8(self, contract):
+        invalid_length_input = _BLS_PAIRING_TRUE_INPUT + b"\x00"
+        call_success, raw_result = contract.functions.callPrecompile(
+            _precompile_address(0x0F), invalid_length_input
+        ).call()
+
+        # Assertion
+        assert len(invalid_length_input) == len(_BLS_PAIRING_TRUE_INPUT) + 1
+        assert call_success is False
+        assert raw_result == b""
