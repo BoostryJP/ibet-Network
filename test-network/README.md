@@ -38,8 +38,8 @@ Node key settings are also configurable through environment variables.
 * `nodekeysource` Node key source (`file` or `aws-sm`)  
 * `nodekeydecryption` Node key decryption (`none` or `aws-kms`)  
 * `nodekey_aws_secret_name` AWS Secrets Manager secret name or ARN  
-* `nodekey_aws_secret_version_id` Optional AWS secret version ID  
-* `nodekey_aws_secret_version_stage` Optional AWS secret version stage, such as `AWSCURRENT`  
+* `nodekey_aws_secret_version_id` AWS secret version ID. When `nodekeysource=aws-sm`, this is required if `nodekey_aws_secret_version_stage` is not set.  
+* `nodekey_aws_secret_version_stage` AWS secret version stage, such as `AWSCURRENT`. When `nodekeysource=aws-sm`, this is required if `nodekey_aws_secret_version_id` is not set. Exactly one of `nodekey_aws_secret_version_id` or `nodekey_aws_secret_version_stage` must be specified when `nodekeysource=aws-sm`.  
 * `nodekey_aws_kms_key_id` AWS KMS key ID or alias, required when `nodekeydecryption=aws-kms`  
 * `nodekey_aws_kms_encryption_algorithm` Optional KMS encryption algorithm override, such as `RSAES_OAEP_SHA_256`  
 
