@@ -6,6 +6,11 @@ escape_toml_string() {
 }
 
 setup_nodekey_options() {
+  if [ -z "${nodekey}" ] && [ -z "${nodekeyhex}" ] && [ -z "${nodekeysource}" ]; then
+    echo "$0: validator nodes require nodekey, nodekeyhex, or nodekeysource to be set." >&2
+    return 1
+  fi
+
   NODEKEY_SOURCE="${nodekeysource:-file}"
   NODEKEY_DECRYPTION="${nodekeydecryption:-none}"
 

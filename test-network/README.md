@@ -44,6 +44,7 @@ Node key settings are also configurable through environment variables.
 * `nodekey_aws_kms_encryption_algorithm` Optional KMS encryption algorithm override, such as `RSAES_OAEP_SHA_256`  
 
 When `nodekey` or `nodekeyhex` is specified, the legacy configuration takes precedence and no additional AWS configuration is required.
+Validator nodes must set one of `nodekey`, `nodekeyhex`, or `nodekeysource` explicitly.
 
 ## 2. Start/Stop Validator node
 
