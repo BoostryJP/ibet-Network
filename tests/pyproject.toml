@@ -10,7 +10,7 @@ python = "3.13.11"
 [tool.poetry.group.dev.dependencies]
 pytest = "^9.0.2"
 eth-keyfile = "~0.8.1"
-eth-utils = "~5.3.1"
+eth-utils = "~6.0.0"
 py-solc-x = "2.0.5"
 web3 = "~7.14.1"
 coincurve = "~21.0.0"
