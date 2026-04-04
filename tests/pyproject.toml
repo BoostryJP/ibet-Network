@@ -12,7 +12,7 @@ pytest = "^9.0.2"
 eth-keyfile = "~0.8.1"
 eth-utils = "~6.0.0"
 py-solc-x = "2.0.5"
-web3 = "~7.14.1"
+web3 = "~7.15.0"
 coincurve = "~21.0.0"
 pycryptodome = "^3.23.0"
 
