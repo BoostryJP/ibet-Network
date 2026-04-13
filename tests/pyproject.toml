@@ -8,7 +8,7 @@ authors = ["BOOSTRY Co., Ltd. <dev@boostry.co.jp>"]
 python = "3.13.11"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^9.0.2"
+pytest = "^9.0.3"
 eth-keyfile = "~0.8.1"
 eth-utils = "~6.0.0"
 py-solc-x = "2.0.5"
