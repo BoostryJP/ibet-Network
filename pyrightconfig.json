@@ -1,0 +1,16 @@
+{
+  "include": [
+    "ibet-for-fin-network/general/monitoring",
+    "local-network/general/monitoring",
+    "test-network/general/monitoring"
+  ],
+  "exclude": [
+    "**/.venv", 
+    "**/__pycache__", 
+    "**/.pytest_cache", 
+  ],
+  "venvPath": ".",
+  "venv": ".venv",
+  "pythonVersion": "3.13",
+  "typeCheckingMode": "strict"
+}
