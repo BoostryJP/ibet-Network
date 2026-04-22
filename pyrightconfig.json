@@ -9,7 +9,7 @@
     "**/__pycache__", 
     "**/.pytest_cache", 
   ],
-  "venvPath": "tests",
+  "venvPath": ".",
   "venv": ".venv",
   "pythonVersion": "3.13",
   "typeCheckingMode": "strict"
