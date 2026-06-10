@@ -12,7 +12,7 @@ This document describes how to run network end-to-end non-degrade tests.
 
 - `SOLC_VERSION_PRAGMA` - Solc version 
   - default => `^0.8.0`
-- `WEB3_HTTP_PROVIDER` - Quorum JSON-RPC server endpoint
+- `WEB3_HTTP_PROVIDER` - ibet-Core JSON-RPC server endpoint
   - default => `http://localhost:8545`
   
 ## Running the tests

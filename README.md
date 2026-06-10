@@ -14,7 +14,7 @@ English | [日本語](./README_JA.md)
 
 [ibet](https://www.ibet.jp/ibet-for-fin) is a consortium blockchain built and operated mainly by [BOOSTRY Co., Ltd.](https://boostry.co.jp/).
 
-This repository contains the network definitions, Quorum node container definitions, and operational tooling for the environments currently provided by the ibet consortium.
+This repository contains the network definitions, ibet-Core node container definitions, and operational tooling for the environments currently provided by the ibet consortium.
 
 ## Supported Environments
 
@@ -36,8 +36,7 @@ For node startup procedures and environment-specific settings, refer to the READ
 
 ## Technical Specifications
 
-- Node client base: [Quorum v24.4.0](https://github.com/ConsenSys/quorum/releases/tag/v24.4.0)
-- Maintained fork: [BoostryJP/quorum](https://github.com/BoostryJP/quorum)
+- Node client: [BoostryJP/ibet-Core](https://github.com/BoostryJP/ibet-Core)
 - Consensus protocol: [QBFT](https://arxiv.org/abs/2002.03613)
 - EVM version: `berlin`
 
@@ -48,7 +47,7 @@ Smart contracts deployed to these networks must be compiled for the `berlin` EVM
 This repository is versioned under the following policy.
 
 - The repository version is updated every 6 months.
-- The Quorum node version is updated every 6 months. The version adopted for each scheduled update is decided by consortium agreement.
+- The ibet-Core node client version is updated every 6 months. The version adopted for each scheduled update is decided by consortium agreement.
 - A minor version update is used when no hard fork is required.
 - A major version update is used when a hard fork is required.
 - Urgent fixes may be released as revision updates outside the regular schedule.
