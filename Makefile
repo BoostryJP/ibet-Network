@@ -1,6 +1,6 @@
 .PHONY: help install install-tools install-tests update format format-check isort black test typecheck
 
-POETRY = env -u VIRTUAL_ENV poetry
+UV = env -u VIRTUAL_ENV UV_MALWARE_CHECK=1 uv
 
 help:
 	@echo "Available targets:"
@@ -21,29 +21,29 @@ install:
 	$(MAKE) install-tests
 
 install-tools:
-	$(POETRY) sync --with dev --no-root
+	$(UV) sync --all-groups
 
 install-tests:
-	$(POETRY) -C tests sync --with dev --no-root
+	$(UV) --directory tests sync --all-groups
 
 update:
-	$(POETRY) update
-	$(POETRY) -C tests update
+	$(UV) lock --upgrade
+	$(UV) --directory tests lock --upgrade
 
 format: isort black
 
 format-check:
-	$(POETRY) run isort --check-only --diff .
-	$(POETRY) run black --check .
+	$(UV) run isort --check-only --diff .
+	$(UV) run black --check .
 
 isort:
-	$(POETRY) run isort .
+	$(UV) run isort .
 
 black:
-	$(POETRY) run black .
+	$(UV) run black .
 
 typecheck:
-	$(POETRY) run pyright
+	$(UV) run pyright
 
 test:
-	$(POETRY) -C tests run pytest -vv . ${ARG}
+	$(UV) --directory tests run pytest -vv . ${ARG}
