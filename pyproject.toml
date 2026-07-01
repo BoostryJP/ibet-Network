@@ -5,7 +5,7 @@ description = "Development tooling for ibet-Network"
 authors = ["BOOSTRY Co., Ltd. <dev@boostry.co.jp>"]
 
 [tool.poetry.dependencies]
-python = "3.13.11"
+python = "3.14.*"
 
 [tool.poetry.group.dev.dependencies]
 isort = "^8.0.1"

@@ -14,7 +14,7 @@ RUN cd ibet-Core/ && \
     mv build/bin/bootnode /usr/local/bin
 
 # Pull Geth into a second stage deploy alpine container
-FROM python:3.13-alpine3.23
+FROM python:3.14-alpine3.23
 
 RUN apk add --no-cache --virtual .build-deps gcc g++ make
 RUN apk add --no-cache ca-certificates

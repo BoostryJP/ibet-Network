@@ -21,8 +21,7 @@ import os
 import secrets
 import sys
 
-from coincurve import PublicKey
-from eth_utils import keccak, to_checksum_address
+from eth_utils import keccak
 from web3 import Web3
 from web3.middleware import ExtraDataToPOAMiddleware
 
@@ -40,8 +39,7 @@ web3.strict_bytes_type_checking = False
 
 for i in range(10000):
     private_key = keccak(secrets.token_bytes(32))
-    public_key = PublicKey.from_valid_secret(private_key).format(compressed=False)[1:]
-    addr = to_checksum_address(keccak(public_key)[-20:])
+    addr = web3.eth.account.from_key(private_key).address
     nonce = web3.eth.get_transaction_count(addr)
     tx = contract.functions.loop10000().build_transaction(
         transaction={
