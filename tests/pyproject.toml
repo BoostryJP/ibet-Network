@@ -1,20 +1,20 @@
-[tool.poetry]
-name = "ibet-Network tests"
+[project]
+name = "ibet-network-tests"
 version = "2.8"
 description = "E2E tests from python client to ibet-Core node containers"
-authors = ["BOOSTRY Co., Ltd. <dev@boostry.co.jp>"]
+authors = [{ name = "BOOSTRY Co., Ltd.", email = "dev@boostry.co.jp" }]
+requires-python = "==3.14.*"
+dependencies = []
 
-[tool.poetry.dependencies]
-python = "3.14.*"
+[dependency-groups]
+dev = [
+    "eth-keyfile>=0.8.1,<0.9",
+    "eth-utils>=6.0.0,<6.1",
+    "py-solc-x==2.0.5",
+    "pycryptodome>=3.23.0,<4",
+    "pytest>=9.0.3,<10",
+    "web3==7.16.0",
+]
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^9.0.3"
-eth-keyfile = "~0.8.1"
-eth-utils = "~6.0.0"
-py-solc-x = "2.0.5"
-web3 = "==7.16.0"
-pycryptodome = "^3.23.0"
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+exclude-newer = "7 days"
