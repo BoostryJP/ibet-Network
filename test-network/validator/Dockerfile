@@ -1,5 +1,5 @@
 # Build Geth in a stock Go builder container
-FROM golang:1.25-alpine AS builder
+FROM golang:1.26.4-alpine AS builder
 
 WORKDIR /work
 
