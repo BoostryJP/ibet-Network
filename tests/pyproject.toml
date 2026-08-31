@@ -8,7 +8,7 @@ dependencies = []
 
 [dependency-groups]
 dev = [
-    "eth-keyfile>=0.8.1,<0.10",
+    "eth-keyfile>=0.8.1,<0.11",
     "eth-utils>=6.0.0,<6.1",
     "py-solc-x==2.0.5",
     "pycryptodome>=3.23.0,<4",
