@@ -13,7 +13,7 @@ dev = [
     "py-solc-x==2.0.5",
     "pycryptodome>=3.23.0,<4",
     "pytest>=9.0.3,<10",
-    "web3==7.16.0",
+    "web3==8.0.0",
 ]
 
 [tool.uv]
