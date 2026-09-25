@@ -7,7 +7,7 @@ RUN apk add --no-cache make gcc musl-dev linux-headers git
 
 RUN git clone https://github.com/BoostryJP/ibet-Core.git && \
     cd ibet-Core/ && \
-    git checkout v26.9.0_beta3
+    git checkout v26.9.0
 RUN cd ibet-Core/ && \
     make geth bootnode && \
     mv build/bin/geth /usr/local/bin && \
