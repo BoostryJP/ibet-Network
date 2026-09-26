@@ -22,16 +22,19 @@ import os
 import sys
 import time
 from logging.config import dictConfig
+from typing import Final
 
 from requests.exceptions import ConnectionError
 from web3 import Web3
 
-BLOCK_SYNC_MONITORING_INTERVAL = os.environ.get("BLOCK_SYNC_MONITORING_INTERVAL") or 30
-MINIMUM_INCREMENTAL_NUMBER = (
-    os.environ.get("BLOCK_SYNC_MONITORING_MINIMUM_INCREMENTAL_NUMBER") or 1
+BLOCK_SYNC_MONITORING_INTERVAL: Final[int] = int(
+    os.environ.get("BLOCK_SYNC_MONITORING_INTERVAL", 30)
+)
+MINIMUM_INCREMENTAL_NUMBER: Final[int] = int(
+    os.environ.get("BLOCK_SYNC_MONITORING_MINIMUM_INCREMENTAL_NUMBER", 1)
 )
 
-web3 = Web3(Web3.HTTPProvider("http://localhost:8545"))
+web3: Final[Web3] = Web3(Web3.HTTPProvider("http://localhost:8545"))
 
 LOG_CONFIG = {
     "version": 1,
@@ -58,14 +61,14 @@ log_fmt = "%(levelname)s [%(asctime)s|MONITOR-BLOCK-SYNC] %(message)s"
 logging.basicConfig(format=log_fmt)
 
 
-def monitor_block_sync(start_block_number):
+def monitor_block_sync(start_block_number: int) -> int:
     """Monitor block synchronization
 
     :param start_block_number: Monitoring start block number
     :return: Next monitoring start block number
     """
     try:
-        latest_block_number = web3.eth.block_number
+        latest_block_number: int = web3.eth.block_number
         if (
             latest_block_number - start_block_number > MINIMUM_INCREMENTAL_NUMBER
         ):  # Normal
@@ -83,12 +86,11 @@ def monitor_block_sync(start_block_number):
             )
     except ConnectionError:
         logging.warning("Unable to connect to node")
-    except Exception as err:
+    except Exception:
         logging.exception(
-            "An exception occurred while monitoring block synchronization: ", err
+            "An exception occurred while monitoring block synchronization"
         )
-    finally:
-        return start_block_number
+    return start_block_number
 
 
 if __name__ == "__main__":
@@ -99,4 +101,4 @@ if __name__ == "__main__":
         block_number = monitor_block_sync(start_block_number=block_number)
 
         elapsed_time = time.time() - start_time
-        time.sleep(max(BLOCK_SYNC_MONITORING_INTERVAL - elapsed_time, 0))
+        time.sleep(max(BLOCK_SYNC_MONITORING_INTERVAL - elapsed_time, 0.0))

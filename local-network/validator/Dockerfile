@@ -1,20 +1,20 @@
 # Build Geth in a stock Go builder container
-FROM golang:1.25-alpine AS builder
+FROM golang:1.26.4-alpine AS builder
 
 WORKDIR /work
 
 RUN apk add --no-cache make gcc musl-dev linux-headers git
 
-RUN git clone https://github.com/BoostryJP/quorum.git && \
-    cd quorum/ && \
-    git checkout v2.7.0
-RUN cd quorum/ && \
+RUN git clone https://github.com/BoostryJP/ibet-Core.git && \
+    cd ibet-Core/ && \
+    git checkout v26.9.0
+RUN cd ibet-Core/ && \
     make geth bootnode && \
     mv build/bin/geth /usr/local/bin && \
     mv build/bin/bootnode /usr/local/bin
 
 # Pull Geth into a second stage deploy alpine container
-FROM python:3.13-alpine3.23
+FROM python:3.14-alpine3.23
 
 RUN apk add --no-cache --virtual .build-deps gcc g++ make
 RUN apk add --no-cache ca-certificates
