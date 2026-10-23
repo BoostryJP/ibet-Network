@@ -18,3 +18,6 @@ dev = [
 
 [tool.uv]
 exclude-newer = "7 days"
+# GHSA-6q48-6c7w-9gw2: require the fixed CA bundle without the release-age delay.
+constraint-dependencies = ["certifi>=2026.10.19"]
+exclude-newer-package = { certifi = "0 days" }

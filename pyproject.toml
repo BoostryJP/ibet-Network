@@ -11,11 +11,14 @@ dev = [
     "black>=26.3.1,<27",
     "isort>=8.0.1,<9",
     "pyright>=1.1.408,<2",
-    "web3==7.16.0",
+    "web3==8.0.0",
 ]
 
 [tool.uv]
 exclude-newer = "7 days"
+# GHSA-6q48-6c7w-9gw2: require the fixed CA bundle without the release-age delay.
+constraint-dependencies = ["certifi>=2026.10.19"]
+exclude-newer-package = { certifi = "0 days" }
 
 [tool.isort]
 profile = "black"
