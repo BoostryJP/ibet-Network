@@ -34,6 +34,11 @@
 - `tests/` : E2Eテスト、テストコントラクト、補助スクリプト
 - `Makefile` : 依存関係の導入、整形、テスト実行用の共通コマンド
 
+## 静的型検査
+
+`make install-tools` で開発用依存関係を導入し、`make typecheck` で3環境の監視スクリプトを検査します。
+`pyproject.toml` の strict 設定を使用する pyrefly により、プルリクエストの CI でも実行されます。
+
 ## 技術仕様
 
 - ノードクライアント: [BoostryJP/ibet-Core](https://github.com/BoostryJP/ibet-Core)
