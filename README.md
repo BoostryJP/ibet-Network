@@ -34,12 +34,6 @@ For node startup procedures and environment-specific settings, refer to the READ
 - `tests/` : end-to-end tests, test contracts, and supporting scripts
 - `Makefile` : common commands for dependency installation, formatting, and test execution
 
-## Static Type Checks
-
-Run `make install-tools` to install development dependencies, then `make typecheck`
-to check the monitoring scripts in all three environments. This uses pyrefly with
-the strict configuration in `pyproject.toml` and also runs in pull request CI.
-
 ## Technical Specifications
 
 - Node client: [BoostryJP/ibet-Core](https://github.com/BoostryJP/ibet-Core)
