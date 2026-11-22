@@ -33,3 +33,4 @@ project-includes = [
 project-excludes = ["**/.venv/**", "**/__pycache__/**", "**/.pytest_cache/**"]
 python-version = "3.14"
 preset = "strict"
+min-severity = "warn"
