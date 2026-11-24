@@ -13,7 +13,7 @@ help:
 	@echo "  format-check   Check formatting with isort and black"
 	@echo "  isort          Run isort"
 	@echo "  black          Run black"
-	@echo "  typecheck      Run pyright"
+	@echo "  typecheck      Run pyrefly"
 	@echo "  test           Run tests (use ARG=... for extra pytest args)"
 
 install:
@@ -43,7 +43,7 @@ black:
 	$(UV) run black .
 
 typecheck:
-	$(UV) run pyright
+	$(UV) run pyrefly check
 
 test:
 	$(UV) --directory tests run pytest -vv . ${ARG}

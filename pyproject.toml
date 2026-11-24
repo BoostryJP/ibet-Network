@@ -10,7 +10,7 @@ dependencies = []
 dev = [
     "black>=26.3.1,<27",
     "isort>=8.0.1,<9",
-    "pyright>=1.1.408,<2",
+    "pyrefly>=1.4.1,<2.0.0",
     "web3==8.0.0",
 ]
 
@@ -23,3 +23,14 @@ exclude-newer-package = { certifi = "0 days" }
 [tool.isort]
 profile = "black"
 combine_as_imports = true
+
+[tool.pyrefly]
+project-includes = [
+    "ibet-for-fin-network/general/monitoring/",
+    "local-network/general/monitoring/",
+    "test-network/general/monitoring/",
+]
+project-excludes = ["**/.venv/**", "**/__pycache__/**", "**/.pytest_cache/**"]
+python-version = "3.14"
+preset = "strict"
+min-severity = "warn"
